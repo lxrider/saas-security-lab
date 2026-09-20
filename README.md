@@ -49,7 +49,7 @@ spending weeks building the product itself.
 ## Approach
 
 ```mermaid
-flowchart LR
+flowchart UD
     A["Understand"] --> B["Build"]
     B --> C["Secure"]
     C --> D["Detect"]
