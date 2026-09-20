@@ -148,14 +148,18 @@ Possible objectives:
 - block legitimate users
 - increase operational costs
 
-### Compromise the software supply chain
+### Compromise the supply chain
+
+Sometimes the easiest path to the target is not through the target itself, but through something it trusts.
 
 Possible objectives:
 
-- inject malicious code
-- compromise CI/CD
-- tamper with dependencies
-- reach production through the build process
+- compromise a dependency or package
+- inject malicious code into the build process
+- compromise CI/CD credentials or runners
+- tamper with build artifacts
+- abuse a trusted third-party integration
+- reach production without directly attacking the production environment
 
 ### Stay invisible
 
