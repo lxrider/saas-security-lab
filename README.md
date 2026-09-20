@@ -1,4 +1,4 @@
-# SaaS Security Lab 🚀
+# SaaS Security Lab
 
 A hands-on project to understand how security fits into a modern SaaS environment.
 
@@ -69,7 +69,7 @@ rely on them.
 
 ## The red rocket
 
-I see this project a little like my red rocket :)
+I see this project a little like my red rocket 🚀
 
 A trip into parts of security I haven't explored deeply yet, built the way I like
 to learn: from a blank page and with my hands on the system.
