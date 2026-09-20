@@ -181,7 +181,7 @@ RedRocket is a small company.
 
 Security cannot depend on dozens of specialists or a huge SOC.
 
-Controls should be understandable, maintainable and proportionate to the risk.
+Controls should stay human, understandable, maintainable and proportionate to the risk.
 
 ## First principle
 
