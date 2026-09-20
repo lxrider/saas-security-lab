@@ -137,6 +137,36 @@ Possible objectives:
 - use the platform to send malicious content
 - impersonate a customer
 - abuse APIs
+- create fraudulent accounts or campaigns
+
+### Disrupt the business
+
+Possible objectives:
+
+- make the service unavailable
+- destroy or corrupt customer data
+- block legitimate users
+- increase operational costs
+
+### Compromise the software supply chain
+
+Possible objectives:
+
+- inject malicious code
+- compromise CI/CD
+- tamper with dependencies
+- reach production through the build process
+
+### Stay invisible
+
+Possible objectives:
+
+- avoid detection
+- remove or alter evidence
+- maintain persistence
+- make incident reconstruction difficult
+
+These objectives will later become inputs for the threat model.
 
 ## Constraint
 
