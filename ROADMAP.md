@@ -1,38 +1,109 @@
 # Roadmap
 
-## Mission 0: Understand the business
+The lab follows a simple path:
 
-- [ ] Define the fictional SaaS company
-- [ ] Define the product
-- [ ] Identify users and customers
-- [ ] Identify sensitive data
-- [ ] Identify critical business processes
-- [ ] Identify the crown jewels
-- [ ] Define availability and trust requirements
+```mermaid
+flowchart TD
+    A["Understand"] --> B["Build"]
+    B --> C["Secure"]
+    C --> D["Detect"]
+    D --> E["Improve"]
+```
 
-## Mission 1: Design the platform
+## 1. Understand
 
-- [ ] Define the first SaaS architecture
-- [ ] Identify trust boundaries
+### Done
+
+- [x] Define RedRocket Engage
+- [x] Define the product
+- [x] Define the main users
+- [x] Identify sensitive data
+- [x] Identify the crown jewels
+- [x] Identify the main attacker objectives
+- [x] Identify supply chain risk
+- [x] Define the first security principles
+
+### Next
+
+- [ ] Define basic availability requirements
+- [ ] Define basic customer security expectations
+
+The goal here is simple:
+
+understand what matters before choosing how to protect it.
+
+## 2. Build
+
+- [ ] Finalize the minimum architecture
 - [ ] Choose the minimum AWS services required
-- [ ] Document the architecture
+- [ ] Build the application
+- [ ] Add PostgreSQL
+- [ ] Add authentication
+- [ ] Add organizations and users
+- [ ] Add contacts
+- [ ] Add campaigns
+- [ ] Add basic RBAC
+- [ ] Expose a small REST API
+- [ ] Deploy the first working version
 
-## Mission 2: Build
+No real email delivery in this lab for now.
 
-Not started yet.
+## 3. Secure
 
-## Mission 3: Threat model
+Once the application exists and I understand how it works:
 
-Not started yet.
+- [ ] Build the first threat model
+- [ ] Identify trust boundaries
+- [ ] Test tenant isolation
+- [ ] Review authentication
+- [ ] Review authorization
+- [ ] Apply least privilege
+- [ ] Protect application and cloud secrets
+- [ ] Add SAST
+- [ ] Add SCA
+- [ ] Add secret scanning
+- [ ] Perform basic API security testing
+- [ ] Review the CI/CD attack surface
 
-## Mission 4: Secure
+The goal is not to add every possible security tool.
 
-Not started yet.
+Each control should answer a real risk.
 
-## Mission 5: Detect and respond
+## 4. Detect
 
-Not started yet.
+- [ ] Identify useful security events
+- [ ] Centralize relevant logs
+- [ ] Define a few meaningful detections
+- [ ] Detect suspicious administrative activity
+- [ ] Detect authentication anomalies
+- [ ] Keep enough evidence to investigate an incident
 
-## Mission 6: Build the security function
+## 5. Improve
 
-Not started yet.
+- [ ] Simulate one realistic security incident
+- [ ] Investigate it using the available logs
+- [ ] Identify what was difficult to detect
+- [ ] Identify what was difficult to understand
+- [ ] Improve the architecture
+- [ ] Update the threat model
+- [ ] Update the risk priorities
+- [ ] Document lessons learned
+
+## Later
+
+Only if the project gives me a good reason to explore them:
+
+- Terraform
+- container security
+- DAST
+- WAF
+- webhooks
+- third-party integrations
+- real email delivery
+- advanced CI/CD controls
+- customer security questionnaires
+- AI features
+
+The roadmap is expected to change.
+
+That's part of the lab.
