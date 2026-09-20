@@ -91,20 +91,52 @@ Privileged access to production systems must be tightly controlled.
 
 Compromising the software delivery process could provide a path into production.
 
-## A few obvious risks
+## Think like the attacker first
 
-- cross-tenant data exposure
-- compromised administrator account
-- leaked credentials or API tokens
-- vulnerable application dependencies
-- malicious changes reaching production
-- exposed customer data
-- service outage
-- security incidents that cannot be properly investigated
+The interesting question is not:
 
-This is not the threat model yet.
+"What can I break?"
 
-The threat model will come once the first architecture exists.
+It is:
+
+"What would an attacker want from RedRocket, and what could they use to get there?"
+
+Before listing vulnerabilities, I want to understand what an attacker would actually
+try to achieve.
+
+An attacker does not care that a system has "a vulnerability" in the abstract.
+They care about the effect they can create by compromising it.
+
+The same logic exists outside cybersecurity: the value of a target comes from the
+impact of taking control of it, disrupting it or using it against something else.
+
+So for RedRocket, I start with attacker objectives.
+
+### Steal customer data
+
+Possible objectives:
+
+- access contact databases
+- access another tenant's data
+- extract personal information
+- steal API credentials or tokens
+
+### Take control of privileged access
+
+Possible objectives:
+
+- compromise a customer administrator
+- compromise an internal support account
+- obtain production access
+- steal cloud or application credentials
+
+### Abuse the platform
+
+Possible objectives:
+
+- use the platform to send malicious content
+- impersonate a customer
+- abuse APIs
 
 ## Constraint
 
