@@ -30,6 +30,8 @@ Inside an organization, users can:
 
 For now, campaigns are prepared but not actually sent.
 
+No real email delivery yet. That's probably a topic for a future lab.
+
 ## Users
 
 ### Customer users
@@ -134,7 +136,7 @@ Possible objectives:
 
 Possible objectives:
 
-- use the platform to send malicious content
+- abuse campaign creation or platform features for malicious purposes
 - impersonate a customer
 - abuse APIs
 - create fraudulent accounts or campaigns
@@ -150,7 +152,8 @@ Possible objectives:
 
 ### Compromise the supply chain
 
-Sometimes the easiest path to the target is not through the target itself, but through something it trusts.
+Sometimes the easiest path to the target is not through the target itself,
+but through something it trusts.
 
 Possible objectives:
 
@@ -158,10 +161,10 @@ Possible objectives:
 - inject malicious code into the build process
 - compromise CI/CD credentials or runners
 - tamper with build artifacts
-- abuse a trusted third-party integration
-- reach production without directly attacking the production environment
+- compromise a trusted third-party service or integration
+- use the software supply chain to reach production indirectly
 
-### Stay invisible
+### Maintain access and avoid detection
 
 Possible objectives:
 
