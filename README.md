@@ -2,84 +2,78 @@
 
 A hands-on project to understand how security fits into a modern SaaS environment.
 
-This is a part of cybersecurity I haven't explored as deeply as infrastructure,
-Linux or IT/OT yet.
+The fictional product is **RedRocket Engage**, a small multi-tenant B2B SaaS application
+where companies can manage contacts and prepare simple marketing campaigns.
 
-So I'm approaching it the way I learn best: **start from a blank page, build something,
-understand how it works, secure it, test it, break things when needed, and improve it.**
+This is a part of cybersecurity I haven't explored as deeply as Linux, infrastructure
+or IT/OT yet.
+
+So I'm approaching it the way I learn best: start from a blank page, build something,
+understand how it works, secure it, test it, break things when needed, and improve it.
 
 The goal is not to pretend I already know everything about SaaS security.
 
 The goal is to understand it by doing it.
 
-## Why this lab?
+## The product
 
-I'm interested in what happens when you have to build a security function around
-a real product rather than around individual technologies.
+RedRocket Engage stays intentionally small.
 
-That means looking at the whole picture:
+A customer organization can:
 
-- the business
-- the application
-- cloud infrastructure
-- identities and access
-- software delivery
-- vulnerabilities
-- logging and detection
-- incident response
-- risk
-- customer trust
+- manage users
+- manage contacts
+- create campaigns
+- use a REST API
 
-Not just security tools.
+No real email delivery yet. That's probably a topic for a future lab.
+
+The application is just complex enough to explore real SaaS security problems without
+spending weeks building the product itself.
 
 ## What I want to explore
 
+- multi-tenant security
+- authentication and authorization
+- RBAC
+- API security
 - AWS and cloud security
 - IAM and least privilege
-- application and API security
-- threat modeling
 - secrets management
 - vulnerability management
-- logging and detection
-- container security
-- infrastructure as code (IaC)
+- SAST and SCA
 - CI/CD security
-- SAST, SCA and DAST
+- logging and detection
 - incident response
-- security governance
 
-## The approach
+## Approach
 
 ```mermaid
 flowchart LR
-    A["Understand the business"] --> B["Build"]
-    B --> C["Understand"]
-    C --> D["Threat model"]
-    D --> E["Secure"]
-    E --> F["Test"]
-    F --> G["Break"]
-    G --> H["Improve"]
+    A["Understand"] --> B["Build"]
+    B --> C["Secure"]
+    C --> D["Detect"]
+    D --> E["Improve"]
 ```
 
-Security does not start with a scanner.
+Security starts with understanding the business first:
 
-It starts with understanding what matters, what is at stake, the systems that
-support the business, the risks, the constraints and, above all, the people who
-rely on them.
+what matters, what is at stake, the systems that support it, the risks,
+the constraints and, above all, the people who rely on them.
 
 ## The red rocket
 
-I see this project a little like my red rocket 🚀
+This is my red rocket project 🚀
 
-A trip into parts of security I haven't explored deeply yet, built the way I like
-to learn: from a blank page and with my hands on the system.
-
-No shortcuts.
+A trip into parts of security I haven't explored deeply yet, using the way
+I learn best: hands-on, from a blank page.
 
 ## Current status
 
-**Starting from scratch.**
+**Step 1: Understand the business**
 
-First step: understand the fictional SaaS business before choosing the architecture.
+The product, users, sensitive data and main security concerns are being defined.
+
+See [Business Context](docs/business-context.md).
 
 ## Build. Break. Understand. Rebuild better.
