@@ -185,7 +185,5 @@ Controls should be understandable, maintainable and proportionate to the risk.
 
 ## First principle
 
-Security starts with understanding the business first:
-
-what matters, what is at stake, the systems that support it, the risks,
+Security starts with understanding the business first: what matters, what is at stake, the systems that support it, the risks,
 the constraints and, above all, the people who rely on them.
