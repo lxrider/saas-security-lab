@@ -184,7 +184,7 @@ The application needs to read and modify stored data.
 That creates another trust relationship.
 
 The database needs to know which application can connect to it, and the
-application needs credentials that allow it to do so.
+application needs some way to access it.
 
 This already creates questions around:
 
@@ -193,6 +193,10 @@ This already creates questions around:
 - secrets
 - least privilege
 - database exposure
+
+The implementation is not decided yet.
+
+The important point is that a trust relationship now exists.
 
 ## The first trust boundaries
 
@@ -223,6 +227,7 @@ The architecture does not currently include:
 - Kubernetes
 - Redis
 - Kafka
+- a public REST API
 - a WAF
 - Terraform
 - CI/CD security tooling
@@ -258,7 +263,16 @@ They appeared because of the way the product has to work.
 
 ## What comes next
 
-The next step is to build the smallest working version of RedRocket.
+Before writing code, the minimum design still needs a little more definition.
+
+The next step is to define:
+
+- the minimum application data model
+- the first user roles
+- the minimum permissions
+- the exact MVP scope
+
+Then RedRocket can be built.
 
 The MVP will introduce real implementation decisions.
 
