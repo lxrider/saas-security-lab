@@ -108,15 +108,18 @@ Both will emerge as RedRocket grows.
 
 ## Current step
 
-**Understand → Sketch → Identify problems**
+**Sketch → Define the MVP**
 
-Before coding the MVP, the current work is limited to:
+The first business context, architecture and security problems are now visible.
 
-- understanding the business context
-- defining the smallest useful product
-- sketching the smallest possible architecture
-- identifying the first security problems
+Before writing code, I only need to define the smallest version of RedRocket
+that can actually work:
+
+- the minimum data model
+- the minimum user roles
+- the minimum permissions
+- the exact MVP scope
+
+Nothing more.
 
 Then we build.
-
-## Build. Break. Understand. Rebuild better.
