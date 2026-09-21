@@ -190,4 +190,4 @@ The roadmap is expected to change.
 
 That's part of the lab.
 
-*Build. Break. Understand. Rebuild better.
+* Build. Break. Understand. Rebuild better.
