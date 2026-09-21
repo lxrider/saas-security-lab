@@ -5,15 +5,11 @@ I am actually trying to protect.
 
 ## RedRocket Engage
 
-RedRocket Engage is a fictional European B2B SaaS company.
+RedRocket Engage is a fictional European B2B SaaS application.
 
-Its product is a small multi-tenant application used by companies to manage
-contacts and prepare simple marketing campaigns.
+Companies use it to manage contacts and prepare simple marketing campaigns.
 
-The company is growing and security has mostly been handled by developers
-and infrastructure teams when needed.
-
-There is no dedicated security function yet.
+The product stays intentionally small.
 
 That's where this lab starts.
 
@@ -26,7 +22,6 @@ Inside an organization, users can:
 - manage contacts
 - create campaigns
 - manage users and roles
-- use the REST API
 
 For now, campaigns are prepared but not actually sent.
 
@@ -40,150 +35,124 @@ They work with contacts and campaigns inside their own organization.
 
 ### Customer administrators
 
-They can manage users, permissions and organization settings.
+They can also manage users, permissions and organization settings.
 
-### Internal support
-
-Support may occasionally need access to investigate customer issues.
-
-That access should be limited and traceable.
-
-### Engineering
-
-Engineers build and operate the platform.
-
-Some actions may require privileged access to production systems.
+At this point, that is enough to create different levels of access inside
+the same customer organization.
 
 ## What matters
 
 The platform only works as a business if customers can trust it.
 
-The main concerns are:
+The first expectations are simple:
 
 - customer data must remain confidential
 - customers must remain isolated from each other
-- privileged access must be controlled
+- important data must not be modified unexpectedly
+- privileged actions must be controlled
 - the service should remain available
-- important actions should be traceable
-- security incidents should be detectable and understandable
+
+These requirements already exist before choosing any security technology.
 
 ## Crown jewels
 
-### Customer contacts
+### Customer data
 
-Names, email addresses and other customer-owned information.
+Contacts and other information customers trust RedRocket with.
+
+Names, email addresses and other customer-owned information have value
+because customers expect RedRocket to protect them.
 
 ### Tenant isolation
 
 A customer must never be able to access another customer's data.
 
+This is one of the most important properties of a multi-tenant application.
+
 ### Administrative accounts
 
-Compromising an administrator could have a major impact.
+Administrators can perform actions that normal users cannot.
 
-### API credentials and secrets
+Compromising one of these accounts could therefore have a larger impact.
 
-Tokens, credentials and application secrets must remain protected.
+### Service availability
 
-### Production access
+Customers need to be able to access and use the service.
 
-Privileged access to production systems must be tightly controlled.
-
-### CI/CD pipeline
-
-Compromising the software delivery process could provide a path into production.
+A platform that cannot be used no longer provides its business function.
 
 ## Think like the attacker first
 
 The interesting question is not:
 
-"What can I break?"
+> "What can I break?"
 
 It is:
 
-"What would an attacker want from RedRocket, and what could they use to get there?"
+> "What would an attacker want from RedRocket, and what could they use to get there?"
 
-Before listing vulnerabilities, I want to understand what an attacker would actually
-try to achieve.
+Before listing vulnerabilities, I want to understand what an attacker would
+actually try to achieve.
 
 An attacker does not care that a system has "a vulnerability" in the abstract.
+
 They care about the effect they can create by compromising it.
 
-The same logic exists outside cybersecurity: the value of a target comes from the
-impact of taking control of it, disrupting it or using it against something else.
-
-So for RedRocket, I start with attacker objectives.
+So for the current version of RedRocket, I start with very simple attacker
+objectives.
 
 ### Steal customer data
 
-Possible objectives:
+An attacker may want to:
 
-- access contact databases
+- access customer contacts
 - access another tenant's data
 - extract personal information
-- steal API credentials or tokens
 
-### Take control of privileged access
+### Take control of an account
 
-Possible objectives:
+An attacker may want to:
 
+- compromise a customer user
 - compromise a customer administrator
-- compromise an internal support account
-- obtain production access
-- steal cloud or application credentials
+- use their permissions to access or modify data
 
-### Abuse the platform
+### Abuse the product
 
-Possible objectives:
+An attacker may want to:
 
-- abuse campaign creation or platform features for malicious purposes
-- impersonate a customer
-- abuse APIs
-- create fraudulent accounts or campaigns
+- impersonate a legitimate user
+- create or modify campaigns
+- manipulate customer data
+- abuse privileged functionality
 
-### Disrupt the business
+### Disrupt the service
 
-Possible objectives:
+An attacker may want to:
 
 - make the service unavailable
 - destroy or corrupt customer data
-- block legitimate users
-- increase operational costs
+- prevent legitimate users from working
 
-### Compromise the supply chain
+These objectives are intentionally basic.
 
-Sometimes the easiest path to the target is not through the target itself,
-but through something it trusts.
+As RedRocket gains new capabilities, new attacker objectives and attack paths
+will appear.
 
-Possible objectives:
-
-- compromise a dependency or package
-- inject malicious code into the build process
-- compromise CI/CD credentials or runners
-- tamper with build artifacts
-- compromise a trusted third-party service or integration
-- use the software supply chain to reach production indirectly
-
-### Maintain access and avoid detection
-
-Possible objectives:
-
-- avoid detection
-- remove or alter evidence
-- maintain persistence
-- make incident reconstruction difficult
-
-These objectives will later become inputs for the threat model.
+They will be added when the product gives us a reason to add them.
 
 ## Constraint
 
-RedRocket is a small company.
+RedRocket should remain small enough to understand.
 
-Security cannot depend on dozens of specialists or a huge SOC.
+Security cannot depend on adding complexity faster than the product itself.
 
-Controls should stay human, understandable, maintainable and proportionate to the risk.
+Controls should stay human, understandable, maintainable and proportionate
+to the risk.
 
 ## First principle
 
-Security starts with understanding the business first: what matters, what is at stake, the systems that support it, the risks,
+Security starts with understanding the business first:
+
+what matters, what is at stake, the systems that support it, the risks,
 the constraints and, above all, the people who rely on them.
