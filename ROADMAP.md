@@ -3,7 +3,7 @@
 The lab follows a simple path:
 
 ```mermaid
-flowchart TD
+flowchart LR
     A["Understand"] --> B["Design"]
     B --> C["Build"]
     C --> D["Secure"]
