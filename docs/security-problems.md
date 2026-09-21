@@ -2,208 +2,81 @@
 
 This document tracks the security problems that appear as RedRocket evolves.
 
-The goal is not to solve them immediately.
+The goal is not to solve them yet.
 
-For now, I only want to understand:
-
-- where the problem comes from
-- what part of the product creates it
-- what could happen if the assumption fails
+For now, I only want to understand what problems are created by the product
+and its architecture.
 
 Controls and technologies will come later.
 
-The list will grow with the product.
+## 1. Tenant isolation
 
-## SP-001: Cross-tenant data exposure
+RedRocket serves multiple customer organizations.
 
-### Appears when
+A user from one organization must never be able to access data belonging
+to another organization.
 
-RedRocket becomes a multi-tenant application.
+The moment RedRocket becomes multi-tenant, this problem exists.
 
-Multiple customer organizations share the same platform.
+## 2. Identity
 
-### Problem
+RedRocket has users.
 
-A user from Organization A could potentially access data belonging to
-Organization B.
+The application therefore needs to know who is interacting with it.
 
-### Why it matters
+If that identity cannot be trusted, later access decisions cannot be trusted
+either.
 
-Tenant isolation is one of the fundamental security properties of the product.
+## 3. Permissions
 
-A failure here could expose customer data across organizations.
+Knowing who the user is is not enough.
 
----
+Different users may be allowed to perform different actions.
 
-## SP-002: User impersonation
+RedRocket therefore needs to decide what each user is allowed to do.
 
-### Appears when
+## 4. Customer data
 
-RedRocket introduces users.
+Customers trust RedRocket with their data.
 
-### Problem
+That immediately creates three basic problems:
 
-The application needs a reliable way to determine who is interacting with it.
+- data must not be exposed to the wrong people
+- data must not be modified unexpectedly
+- data must remain available when needed
 
-If identity cannot be trusted, someone could act as another user.
+These requirements exist because of the product itself, not because of a
+security framework.
 
-### Why it matters
+## 5. Untrusted input
 
-Most later access decisions depend on knowing who the user actually is.
+The browser sends information to the application.
 
----
+The application cannot assume that everything it receives is valid,
+expected or harmless.
 
-## SP-003: Unauthorized actions
+The user controls one side of this relationship.
 
-### Appears when
+## 6. Application to database trust
 
-Different users have different responsibilities.
+The application needs to read and modify data stored in the database.
 
-### Problem
+That creates another trust relationship.
 
-Knowing who a user is does not tell RedRocket what that user is allowed to do.
+The database must decide whether the application can connect and what it
+can do.
 
-A user could potentially perform actions outside their expected privileges.
-
-### Why it matters
-
-Administrative or sensitive actions should not be available to every user.
-
----
-
-## SP-004: Customer data exposure
-
-### Appears when
-
-RedRocket stores customer contacts.
-
-### Problem
-
-Customer-owned information could be accessed by someone who should not see it.
-
-### Why it matters
-
-Customers trust RedRocket with names, email addresses and other information.
-
-Confidentiality is therefore a direct business requirement.
-
----
-
-## SP-005: Unauthorized or incorrect data modification
-
-### Appears when
-
-Users can create or modify contacts and campaigns.
-
-### Problem
-
-Customer data could be changed intentionally or accidentally in a way that
-RedRocket should not accept.
-
-### Why it matters
-
-Customers need to be able to trust the correctness of the data stored in
-the platform.
-
----
-
-## SP-006: Data loss or service unavailability
-
-### Appears when
-
-Customers depend on RedRocket to store and access their data.
-
-### Problem
-
-Data or application functionality could become unavailable.
-
-### Why it matters
-
-A service that customers cannot use no longer provides its expected business
-function.
-
----
-
-## SP-007: Untrusted client input
-
-### Appears when
-
-A browser starts sending information to the RedRocket application.
-
-### Problem
-
-The application cannot assume that requests received from the browser are
-valid, expected or harmless.
-
-A user controls the client side of this trust boundary.
-
-### Why it matters
-
-Unexpected or malicious input may influence application behaviour or data.
-
----
-
-## SP-008: Application to database trust
-
-### Appears when
-
-The RedRocket application connects to the database.
-
-### Problem
-
-The database must decide whether the application is allowed to connect and
-what it is allowed to do.
-
-The application also needs some way to prove its identity to the database.
-
-### Why it matters
-
-Compromise or misuse of this relationship could expose or modify all data
-accessible to the application.
-
----
-
-## SP-009: Excessive database privileges
-
-### Appears when
-
-The application receives permissions on the database.
-
-### Problem
-
-The application may have more database access than it actually needs.
-
-### Why it matters
-
-If the application is compromised, unnecessary privileges could increase the
-impact.
-
----
-
-## SP-010: Database exposure
-
-### Appears when
-
-A database becomes part of the technical architecture.
-
-### Problem
-
-The database could potentially become reachable by systems or users that
-should never communicate with it directly.
-
-### Why it matters
-
-Direct access could bypass application-level security decisions.
-
----
+If this relationship is abused, customer data may be exposed, modified or
+destroyed.
 
 ## Current state
 
-These problems have been identified.
+These are the security problems visible in the smallest RedRocket
+architecture.
 
-They have not been solved yet.
+They are not solved yet.
 
-That is intentional.
+As the product grows, new components and relationships will create new
+problems.
 
-The next design and implementation steps will probably introduce new security
-problems, which will be added here before deciding how to address them.
+They will be added here when they actually appear.
