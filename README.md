@@ -2,21 +2,13 @@
 
 A hands-on project to understand how security fits into a modern SaaS environment.
 
-The fictional product is **RedRocket Engage**, a small multi-tenant B2B SaaS application
-where companies can manage contacts and prepare simple marketing campaigns.
+**RedRocket Engage** is a small fictional multi-tenant B2B SaaS application.
 
-This is a part of cybersecurity I haven't explored as deeply as Linux, infrastructure
-or IT/OT yet.
-
-So I'm approaching it the way I learn best: start from a blank page, understand the problem, build something, test it, break things when needed, and improve it.
+I start from a blank page, build the smallest useful product, observe the security problems that appear, and improve it step by step.
 
 The goal is not to know everything about SaaS security.
 
-The goal is to understand it by doing it, the way a real team would.
-
-This approach makes security problems appear naturally as the product is designed and built.
-
-It also shows where security needs to become part of the project from the beginning.
+The goal is to understand how to integrate security into the product from the beginning.
 
 This is **Security by Design**.
 
