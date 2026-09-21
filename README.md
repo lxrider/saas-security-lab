@@ -8,12 +8,17 @@ where companies can manage contacts and prepare simple marketing campaigns.
 This is a part of cybersecurity I haven't explored as deeply as Linux, infrastructure
 or IT/OT yet.
 
-So I'm approaching it the way I learn best: start from a blank page, understand the
-problem, build something, test it, break things when needed, and improve it.
+So I'm approaching it the way I learn best: start from a blank page, understand the problem, build something, test it, break things when needed, and improve it.
 
-The goal is not to pretend I already know everything about SaaS security.
+The goal is not to know everything about SaaS security.
 
-The goal is to understand it by doing it.
+The goal is to understand it by doing it, the way a real team would.
+
+This approach makes security problems appear naturally as the product is designed and built.
+
+It also shows where security needs to become part of the project from the beginning.
+
+This is **Security by Design**.
 
 ## The product
 
