@@ -24,7 +24,6 @@ A customer organization can:
 - manage users
 - manage contacts
 - create campaigns
-- use a REST API
 
 No real email delivery yet. That's probably a topic for a future lab.
 
@@ -55,19 +54,21 @@ Only then does it make sense to build.
 The MVP will create new questions, and those questions will drive the next
 security decisions.
 
-I would rather understand the first 50 cm properly than jump straight to 1.5 m
+I'd rather understand the first 50 cm properly than jump straight to 1.5 m
 without understanding what is underneath.
 
 ```mermaid
 flowchart LR
     A["Understand"] --> B["Design"]
     B --> C["Build"]
-    C --> D["Secure"]
+    C --> D["Review"]
     D --> E["Detect"]
     E --> F["Improve"]
 ```
 
 ## What I want to explore
+
+As RedRocket grows, the project may eventually lead me into areas such as:
 
 - multi-tenant security
 - authentication and authorization
