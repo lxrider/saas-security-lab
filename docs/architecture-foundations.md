@@ -4,7 +4,7 @@
 
 RedRocket starts with one simple idea:
 
-a customer uses a service and trusts it with data.
+> a customer uses a service and trusts it with data.
 
 Before choosing a framework, a cloud provider or a security product,
 I want to understand what this simple relationship already implies.
