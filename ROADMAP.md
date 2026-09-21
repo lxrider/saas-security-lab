@@ -1,196 +1,122 @@
 # Roadmap
 
-The lab follows a simple path:
+This project starts from a blank page.
+
+I do not want to define the final architecture, security controls or technology
+stack before understanding why they are needed.
+
+The process is deliberately simple:
 
 ```mermaid
 flowchart LR
-    A["Understand"] --> B["Design"]
-    B --> C["Build"]
-    C --> D["Review"]
-    D --> E["Detect"]
-    E --> F["Improve"]
+    A["Understand"] --> B["Sketch"]
+    B --> C["Identify problems"]
+    C --> D["Build"]
+    D --> E["Observe"]
+    E --> F["Iterate"]
+    F --> B
 ```
-
-The important part is not how many security tools, controls or frameworks
-appear in the project.
-
-At this stage, I do not care about starting with OWASP, a WAF, SAST, DAST
-or a predefined security checklist.
-
-Those things may become useful later, but only when the product gives me
-a reason to use them.
-
-What matters first is identifying the security problems that already exist
-in the simplest possible version of the product.
-
-Then, every time RedRocket grows, I will ask the same questions again:
-
-- What changed?
-- What new component or relationship did we introduce?
-- What does it trust?
-- What data crosses that boundary?
-- What could go wrong?
-- What new security problem does that create?
-
-The security architecture will therefore grow with the product.
-
-The goal is to progressively build a global view of RedRocket security from
-real architectural and business problems, rather than starting from a list
-of controls and trying to fit the product into it.
 
 ## 1. Understand
 
-### Done
+Start with the business.
 
-- [x] Define RedRocket Engage
-- [x] Define the product
-- [x] Define the main users
-- [x] Identify sensitive data
-- [x] Identify the first crown jewels
-- [x] Identify the first attacker objectives
-- [x] Define the first security principles
+- What are we building?
+- Who is it for?
+- What does it need to do?
+- What data does it handle?
+- What really matters?
 
-The goal is simple:
+Do not think about security products yet.
 
-understand what matters before deciding how to protect it.
+Do not think about AWS yet.
 
-## 2. Design
+Do not think about OWASP yet.
 
-### Done
+First understand the problem.
 
-- [x] Define the smallest useful product
-- [x] Define the first business relationships
-- [x] Define the smallest technical architecture
-- [x] Identify tenant isolation as a core security property
-- [x] Identify authentication requirements
-- [x] Identify authorization requirements
-- [x] Identify the first data protection questions
-- [x] Identify the first trust boundaries
+## 2. Sketch
 
-### Next
+Draw the smallest possible product and architecture.
 
-- [ ] Define the minimum application data model
-- [ ] Define the first user roles
-- [ ] Define the minimum permissions
-- [ ] Define the minimum MVP scope
+Only add a component when the product actually needs it.
+
+For each component, understand:
+
+- why it exists
+- what it does
+- what it communicates with
+- what it has to trust
 
 The goal is not to design the final architecture.
 
-It is to understand the smallest architecture well enough to build it and
-to identify the security problems that already exist before writing code.
+The goal is to understand the next 50 cm.
 
-## 3. Build
+## 3. Identify problems
 
-- [ ] Choose the minimum application stack
-- [ ] Build the application skeleton
-- [ ] Add the database
-- [ ] Add organizations
-- [ ] Add users
-- [ ] Add contacts
-- [ ] Add campaigns
-- [ ] Add authentication
-- [ ] Add basic authorization
-- [ ] Run the first working MVP
+Before trying to secure anything, identify the security problems created by
+what has just been designed.
 
-No real email delivery in this lab for now.
+Ask:
 
-While building, document the new security problems that appear.
+- What could go wrong?
+- What could be accessed?
+- What could be modified?
+- What could disappear?
+- What are we trusting?
+- What happens if that trust is wrong?
 
-Every new component, feature or relationship may introduce:
+Document the problems.
 
-- new data
-- new trust assumptions
-- new attack paths
-- new permissions
-- new dependencies
-- new failure modes
+Do not solve all of them yet.
 
-Those problems will drive the next security decisions.
+## 4. Build
 
-## 4. Review
+Build the smallest useful version of RedRocket.
 
-Security is not a separate layer added after the product is built.
+Implementation decisions will create new relationships, dependencies and
+assumptions.
 
-Security questions have already appeared during business analysis, design
-and implementation.
+That is expected.
 
-This phase is where I step back and connect those problems together.
+## 5. Observe
 
-The objective is to start building a broader view of the RedRocket security
-architecture.
+Look at what actually exists now.
 
-- [ ] Review the attack surface created by the MVP
-- [ ] Build the first threat model
-- [ ] Review trust boundaries
-- [ ] Test tenant isolation
-- [ ] Review authentication
-- [ ] Review authorization
-- [ ] Apply least privilege where needed
-- [ ] Review application secrets
-- [ ] Review dependencies introduced by the MVP
-- [ ] Add security testing where it solves a real problem
+Ask again:
 
-OWASP, WAFs, SAST, DAST or other controls may appear eventually, but only
-when they answer a problem that RedRocket has actually created.
+- What changed?
+- What new security problems appeared?
+- What assumptions turned out to be wrong?
+- What became more important?
+- What became unnecessary?
 
-The tool is not the starting point.
+Add those problems to the project.
 
-The problem is.
+## 6. Iterate
 
-## 5. Detect
+Improve the product and the architecture one step at a time.
 
-Once RedRocket starts doing useful things, it also needs to provide enough
-information to understand when something unusual happens.
+Security controls, frameworks and technologies should appear when there is
+a real problem that gives them a reason to exist.
 
-- [ ] Identify useful security events
-- [ ] Centralize relevant logs
-- [ ] Define a few meaningful detections
-- [ ] Detect suspicious administrative activity
-- [ ] Detect authentication anomalies
-- [ ] Keep enough evidence to investigate an incident
+The architecture is not known in advance.
 
-Detection should follow the same principle:
+Neither is the final security architecture.
 
-do not collect everything just because it can be collected.
+Both will emerge as RedRocket grows.
 
-Start with the events that help explain the risks already identified.
+## Current step
 
-## 6. Improve
+**Understand → Sketch → Identify problems**
 
-- [ ] Simulate one realistic security incident
-- [ ] Investigate it using the available logs
-- [ ] Identify what was difficult to detect
-- [ ] Identify what was difficult to understand
-- [ ] Improve the architecture
-- [ ] Update the threat model
-- [ ] Update the risk priorities
-- [ ] Document lessons learned
+Before coding the MVP, the current work is limited to:
 
-Each iteration should improve both the product and the understanding of its
-security architecture.
+- understanding the business context
+- defining the smallest useful product
+- sketching the smallest possible architecture
+- identifying the first security problems
 
-## Later
+Then we build.
 
-Only if the project gives me a good reason to explore them:
-
-- public REST API
-- AWS architecture
-- Terraform
-- container security
-- SAST
-- SCA
-- DAST
-- WAF
-- webhooks
-- third-party integrations
-- real email delivery
-- CI/CD
-- software supply chain security
-- customer security questionnaires
-- AI features
-
-The roadmap is expected to change.
-
-That's part of the lab.
-
-*Build. Break. Understand. Rebuild better.*
+## Build. Break. Understand. Rebuild better.
