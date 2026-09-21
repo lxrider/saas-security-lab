@@ -65,8 +65,9 @@ the constraints and, above all, the people who rely on them.
 
 This is my red rocket project 🚀
 
-A trip into parts of security I haven't explored deeply yet, using the way
-I learn best: hands-on, from a blank page.
+A trip into parts of security I haven't explored deeply yet. Starting from a blank page quickly led me to the first practical milestone in SaaS security: before securing an application, you need an application to secure.
+
+That means facing the same questions architects and developers face: what are we building, for whom, with what data, how should users access it, and how should the different parts of the system trust each other?
 
 ## Current status
 
