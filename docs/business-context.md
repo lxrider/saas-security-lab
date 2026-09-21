@@ -53,6 +53,8 @@ It is:
 
 > "What would an attacker want from RedRocket?"
 
+In other words his **objectives**.
+
 For the current version, the main objectives are simple:
 
 - steal customer data
