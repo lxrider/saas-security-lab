@@ -3,7 +3,7 @@
 Before choosing AWS services or security tools, I want to understand what
 I am actually trying to protect.
 
-## RedRocket Engage
+## RedRocket Engage 🚀
 
 RedRocket Engage is a fictional European B2B SaaS application.
 
