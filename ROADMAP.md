@@ -6,7 +6,7 @@ The lab follows a simple path:
 flowchart LR
     A["Understand"] --> B["Design"]
     B --> C["Build"]
-    C --> D["Secure"]
+    C --> D["Review"]
     D --> E["Detect"]
     E --> F["Improve"]
 ```
@@ -46,9 +46,8 @@ of controls and trying to fit the product into it.
 - [x] Define the product
 - [x] Define the main users
 - [x] Identify sensitive data
-- [x] Identify the crown jewels
-- [x] Identify the main attacker objectives
-- [x] Identify supply chain risk
+- [x] Identify the first crown jewels
+- [x] Identify the first attacker objectives
 - [x] Define the first security principles
 
 The goal is simple:
@@ -91,7 +90,6 @@ to identify the security problems that already exist before writing code.
 - [ ] Add campaigns
 - [ ] Add authentication
 - [ ] Add basic authorization
-- [ ] Expose a small REST API
 - [ ] Run the first working MVP
 
 No real email delivery in this lab for now.
@@ -109,30 +107,31 @@ Every new component, feature or relationship may introduce:
 
 Those problems will drive the next security decisions.
 
-## 4. Secure
+## 4. Review
 
 Security is not a separate layer added after the product is built.
 
-By this stage, many security problems should already have been identified
-during design and implementation.
+Security questions have already appeared during business analysis, design
+and implementation.
 
-This phase is where I step back, connect those problems together and start
-building a broader view of the security architecture.
+This phase is where I step back and connect those problems together.
 
-- [ ] Review the new attack surface
+The objective is to start building a broader view of the RedRocket security
+architecture.
+
+- [ ] Review the attack surface created by the MVP
 - [ ] Build the first threat model
 - [ ] Review trust boundaries
 - [ ] Test tenant isolation
 - [ ] Review authentication
 - [ ] Review authorization
-- [ ] Apply least privilege
-- [ ] Protect application secrets
-- [ ] Review dependency risk
-- [ ] Review the CI/CD attack surface
+- [ ] Apply least privilege where needed
+- [ ] Review application secrets
+- [ ] Review dependencies introduced by the MVP
 - [ ] Add security testing where it solves a real problem
 
-OWASP, WAFs, SAST, DAST or other controls may appear here, but only when
-they answer a problem that RedRocket has actually created.
+OWASP, WAFs, SAST, DAST or other controls may appear eventually, but only
+when they answer a problem that RedRocket has actually created.
 
 The tool is not the starting point.
 
@@ -174,15 +173,19 @@ security architecture.
 
 Only if the project gives me a good reason to explore them:
 
+- public REST API
 - AWS architecture
 - Terraform
 - container security
+- SAST
+- SCA
 - DAST
 - WAF
 - webhooks
 - third-party integrations
 - real email delivery
-- advanced CI/CD controls
+- CI/CD
+- software supply chain security
 - customer security questionnaires
 - AI features
 
@@ -190,4 +193,4 @@ The roadmap is expected to change.
 
 That's part of the lab.
 
-* Build. Break. Understand. Rebuild better.
+*Build. Break. Understand. Rebuild better.*
