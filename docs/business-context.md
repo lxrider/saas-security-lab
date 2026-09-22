@@ -84,5 +84,8 @@ to the problems they are meant to solve.
 
 ## First principle
 
-Security starts with understanding the business first: what matters, what is at
-stake, what the product does and who relies on it.
+Security starts with understanding the business first: 
+- what matters?
+- what is at stake?
+- what the product does?
+- who relies on it?
