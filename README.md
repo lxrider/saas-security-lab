@@ -29,7 +29,9 @@ security tools, frameworks or advanced cloud architecture.
 
 First, understand what we are building, who will use it, what data it will
 handle, what the smallest architecture looks like, what each component has to
-trust, and what security problems already appear.
+trust, and what security problems already appear. External requirements may
+also shape the product: customers subject to NIS2, for example, may expect
+specific security requirements from their SaaS providers.
 
 The first security problems are visible before writing code. The MVP will
 create new questions, and those questions will drive the next security
