@@ -1,68 +1,47 @@
 # SaaS Security Lab
 
-A hands-on project to demonstrate a simple **Security by Design** approach on a small SaaS application.
+This project explores a simple **Security by Design** approach through the construction of a small SaaS application.
 
-RedRocket Engage is a fictional multi-tenant B2B SaaS.
+RedRocket Engage is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture, nor to apply a catalogue of controls. The project starts from the business problem, identifies what creates value for the customer, observes where security problems appear in the design, and improves the product progressively.
 
-The goal is not to build a complete SaaS security architecture or apply a security checklist.
+The approach is deliberately simple:
 
-The goal is to start from the business problem, understand what the product makes valuable, identify where critical risks appear in the design, and improve the product step by step.
+**Understand → Sketch → Identify problems → Build → Observe → Iterate**
 
-> **Understand first. Build. Observe. Improve.**
+## Business context
 
-## Start with the business
+Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools. RedRocket provides a common workspace where an organization can manage its users, contacts and campaigns.
 
-Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools.
+Its value comes from centralizing customer information and making it available to the people who need it. In return, customers entrust RedRocket with business data and business operations.
 
-RedRocket provides a shared workspace where an organization can manage:
+This creates several expectations: customer data must remain separated between organizations, privileged functions must remain under authorized control, and a limited compromise should not automatically expose the whole service.
 
-* users
-* contacts
-* campaigns
+The security work starts from these business expectations.
 
-Its value comes from centralizing customer information and making it available to the right people inside the organization.
+More detail is available in [Business Context](docs/business-context.md).
 
-That value also creates trust.
+## Security scope
 
-Customers rely on RedRocket to store their data, control who can access it and keep their organization separated from others using the same service.
+The first iterations focus on three critical outcomes.
 
-This is where the security problem begins.
-
-## Three critical risks
-
-For the first iterations, RedRocket focuses on three outcomes that should not be possible.
-
-### 1. Unauthorized access to customer data
-
+**Unauthorized access to customer data.**
 A user from one organization must not be able to access data belonging to another organization.
 
-### 2. Unauthorized privileged control
-
+**Unauthorized privileged control.**
 An attacker must not be able to obtain or abuse administrative capabilities.
 
-### 3. Broad compromise from a limited foothold
-
+**Broad compromise from a limited foothold.**
 Compromising one part of RedRocket should not unnecessarily provide access to the rest of the application or its data.
 
-These three risks are not intended to represent every possible SaaS threat.
-
-They define a deliberately small security scope for the lab.
+These three outcomes do not attempt to represent every SaaS threat. They provide a deliberately limited scope that is sufficient to demonstrate the reasoning.
 
 ## Security by Design
 
-Security starts with the product and its architecture, not with tools.
+Security is approached from the product and its architecture rather than from tools.
 
-We do not begin with a framework, a list of controls or a predefined security stack.
+The project does not begin with a security framework, a predefined control set or a security stack. It first asks what the product is trying to achieve, what the customer entrusts to it, what could materially damage that value, and where the design creates a path towards that outcome.
 
-We first understand:
-
-* what problem the product solves
-* what value it creates
-* what the customer entrusts to it
-* what could materially damage that value
-* where the design makes that possible
-
-Then we build.
+Only then is a treatment considered.
 
 ```mermaid
 flowchart LR
@@ -74,67 +53,49 @@ flowchart LR
     F --> B
 ```
 
-New security questions are added only when the product or architecture gives them a reason to exist.
+A security topic is therefore introduced only when the product or architecture gives it a reason to exist.
 
-## From risk to evidence
+## From risk to implementation
 
-Each security problem should follow the same reasoning:
+Each problem should remain traceable to a business concern.
+
+The reasoning is kept intentionally short:
 
 ```text
 Business value
-     ↓
+    ↓
 Critical risk
-     ↓
+    ↓
 Where does it appear?
-     ↓
-Why does the design allow it?
-     ↓
+    ↓
+Why does the current design allow it?
+    ↓
 What is the smallest appropriate treatment?
-     ↓
+    ↓
 Can we demonstrate that it works?
 ```
 
-For example:
+For example, customer data has value and must remain isolated between organizations. If a resource is retrieved only from its identifier, without checking its organization, a cross-tenant access path appears.
 
-```text
-Customer data has value
-        ↓
-Another tenant must not access it
-        ↓
-A resource is retrieved only by its ID
-        ↓
-Tenant ownership is not verified
-        ↓
-Access is bound to the current organization
-        ↓
-A cross-tenant request is rejected by a test
-```
+The treatment is then introduced where the problem exists, and an automated test demonstrates that the unwanted access is no longer possible.
 
-The interesting part is not the control itself.
+The objective is not to showcase the control itself. The objective is to make the reasoning from business requirement to technical decision visible.
 
-It is the reasoning that led to it.
+## RedRocket MVP
 
-## The product
+RedRocket remains intentionally small.
 
-RedRocket stays intentionally small.
+An organization can manage users and contacts, and create campaigns. There is no real email delivery at this stage.
 
-The MVP allows an organization to:
+The first architecture is deliberately simple: one application, one database and a monolithic deployment. Additional components will only be introduced when the product requires them.
 
-* manage users
-* manage contacts
-* create campaigns
+The application needs only enough functionality to expose meaningful security problems and allow their treatment to be demonstrated.
 
-No real email delivery yet.
+## Deliverable
 
-The first version is a monolith with one application and one database.
+The project will result in a small working application accompanied by its architecture decisions, security observations and tests.
 
-The application only needs enough functionality to expose meaningful security problems.
-
-## The deliverable
-
-RedRocket will become a small working application, not only an architecture exercise.
-
-The repository should eventually contain:
+The repository is expected to remain simple:
 
 ```text
 saas-security-lab/
@@ -146,31 +107,17 @@ saas-security-lab/
 └── README.md
 ```
 
-The application and its security tests will also provide a reusable workload for a separate **DevSecOps lab**.
+The application and its security tests will later be reused as a workload for a separate DevSecOps lab.
 
-This repository focuses on:
-
-**understanding the business → designing the product → identifying risk → treating it → demonstrating the result**
-
-The DevSecOps lab will focus on continuously verifying those security properties during development.
+This repository therefore focuses on understanding the business, designing the product, identifying security problems and treating them. The DevSecOps lab will focus on continuously verifying that these security properties remain valid during development.
 
 ## Current status
 
-The first foundations are defined:
+The business problem, MVP, architecture foundations, critical security outcomes and first architecture decisions are defined.
 
-* business problem
-* product value
-* MVP
-* architecture foundations
-* three critical security risks
-* architecture decision process
-* monolithic architecture
+The next step is to choose the minimum application stack and start building.
 
-Next:
-
-**Choose the minimum application stack and start building.**
-
-Project documentation:
+Documentation:
 
 * [Business Context](docs/business-context.md)
 * [Architecture Foundations](docs/architecture-foundations.md)
@@ -178,5 +125,3 @@ Project documentation:
 * [Security Problems](docs/security-problems.md)
 * [Roadmap](ROADMAP.md)
 * [Architecture Decisions](docs/adr/)
-
-## Build. Break. Understand. Rebuild better.
