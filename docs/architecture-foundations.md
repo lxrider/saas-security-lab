@@ -112,9 +112,9 @@ flowchart LR
 
 Three technical components are enough:
 
-1. a browser
-2. an application
-3. a database
+1. browser
+2. application
+3. database
 
 The technology used to implement them is secondary for now.
 
