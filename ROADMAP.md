@@ -78,7 +78,24 @@ Only the architecture decisions required to build it should be made.
 
 Important decisions are recorded as ADRs so that the choice and its security consequences remain understandable.
 
-The first decision is to keep the MVP as a monolith rather than introduce microservices before the product needs them.
+RedRocket starts as a **modular monolith**: one deployable application and one database, with clear internal boundaries between the main business capabilities.
+
+This is a deliberate first step, not a statement about the final architecture.
+
+The monolith will be revisited when the product creates a concrete reason to do so, for example:
+
+- a capability needs to scale independently
+- workloads become significantly different
+- deployment cycles need to be separated
+- failures need stronger isolation
+- teams need independent ownership
+- a security boundary would benefit from stronger isolation
+
+A growing number of features alone is not sufficient reason to introduce microservices.
+
+If one of these constraints appears, the relevant capability may be extracted and the new architecture, trust relationships and security implications will be documented in a new ADR.
+
+This evolution will also provide the natural transition towards the future DevOps / DevSecOps lab, where distributed services, CI/CD and infrastructure concerns will become part of the problem to solve.
 
 Next:
 
