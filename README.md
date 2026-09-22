@@ -6,7 +6,7 @@ RedRocket Engage 🚀 is a fictional multi-tenant B2B SaaS. The objective is not
 
 The approach is deliberately simple:
 
-**Understand → Sketch → Identify problems → Build → Observe → Iterate**
+> **Understand → Sketch → Identify problems → Build → Observe → Iterate**
 
 ## Business context
 
