@@ -183,21 +183,14 @@ Each boundary is a place where assumptions have to be questioned:
 
 The architecture does not currently include:
 
-- AWS services
-- containers
-- Kubernetes
-- Redis
-- Kafka
-- a public REST API
-- a WAF
-- Terraform
-- CI/CD security tooling
-- SAST
-- DAST
-- EDR, SIEM & all detection stuff...
+- cloud infrastructure
+- containers or orchestration
+- public APIs
+- CI/CD and infrastructure as code
+- security testing tooling
+- WAF, SIEM, logging or detection tooling
 
-Those technologies may become useful later. Adding them now would create
-complexity before there is a problem that justifies them.
+Those may appear later if the product gives us a reason to add them.
 
 ## What we have learned before coding
 
