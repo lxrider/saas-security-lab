@@ -2,44 +2,67 @@
 
 A hands-on project to demonstrate a simple **Security by Design** approach on a small SaaS application.
 
-**RedRocket Engage** is a fictional multi-tenant B2B SaaS. I start from a blank page, build the smallest useful product, identify where critical security risks appear in the design, and improve it step by step.
+RedRocket Engage is a fictional multi-tenant B2B SaaS.
 
 The goal is not to build a complete SaaS security architecture or apply a security checklist.
 
-The goal is to understand **what needs to be protected, where risk appears, and how the design can reduce it**.
+The goal is to start from the business problem, understand what the product makes valuable, identify where critical risks appear in the design, and improve the product step by step.
 
 > **Understand first. Build. Observe. Improve.**
 
-## The product
+## Start with the business
 
-RedRocket Engage stays intentionally small.
+Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools.
 
-A customer organization can:
+RedRocket provides a shared workspace where an organization can manage:
 
-* manage users
-* manage contacts
-* create campaigns
+* users
+* contacts
+* campaigns
 
-No real email delivery yet. The application only needs enough functionality to expose meaningful SaaS security problems.
+Its value comes from centralizing customer information and making it available to the right people inside the organization.
 
-The first version is a monolith with one application and one database.
+That value also creates trust.
+
+Customers rely on RedRocket to store their data, control who can access it and keep their organization separated from others using the same service.
+
+This is where the security problem begins.
+
+## Three critical risks
+
+For the first iterations, RedRocket focuses on three outcomes that should not be possible.
+
+### 1. Unauthorized access to customer data
+
+A user from one organization must not be able to access data belonging to another organization.
+
+### 2. Unauthorized privileged control
+
+An attacker must not be able to obtain or abuse administrative capabilities.
+
+### 3. Broad compromise from a limited foothold
+
+Compromising one part of RedRocket should not unnecessarily provide access to the rest of the application or its data.
+
+These three risks are not intended to represent every possible SaaS threat.
+
+They define a deliberately small security scope for the lab.
 
 ## Security by Design
 
 Security starts with the product and its architecture, not with tools.
 
-Before choosing controls, we first understand:
+We do not begin with a framework, a list of controls or a predefined security stack.
 
-* what we are building
-* who uses it
-* what data it handles
-* what needs to be trusted
-* what an attacker could gain
+We first understand:
+
+* what problem the product solves
+* what value it creates
+* what the customer entrusts to it
+* what could materially damage that value
 * where the design makes that possible
 
 Then we build.
-
-New security questions are documented when the product or architecture gives them a reason to exist.
 
 ```mermaid
 flowchart LR
@@ -51,46 +74,20 @@ flowchart LR
     F --> B
 ```
 
-This keeps the project deliberately small.
-
-No control is added simply because it is considered a security best practice. It needs to solve a problem that RedRocket actually has.
-
-## Three critical risks
-
-For the first iterations, RedRocket focuses on three security outcomes that should not be possible.
-
-### 1. Unauthorized access to customer data
-
-A user from one organization must not be able to access data belonging to another organization.
-
-This makes tenant isolation and authorization part of the product design, not just implementation details.
-
-### 2. Unauthorized privileged control
-
-An attacker must not be able to obtain or abuse administrative capabilities.
-
-As privileged functions appear in RedRocket, we will identify where that trust is created and how it should be constrained.
-
-### 3. Broad compromise from a limited foothold
-
-Compromising one part of RedRocket should not unnecessarily provide access to the rest of the application or its data.
-
-Architecture decisions such as application privileges, database access and component trust will be examined when they create this risk.
-
-These three risks are not intended to represent every possible SaaS threat.
-
-They give the lab a small and concrete security scope.
+New security questions are added only when the product or architecture gives them a reason to exist.
 
 ## From risk to evidence
 
 Each security problem should follow the same reasoning:
 
 ```text
+Business value
+     ↓
 Critical risk
      ↓
 Where does it appear?
      ↓
-Why does the current design allow it?
+Why does the design allow it?
      ↓
 What is the smallest appropriate treatment?
      ↓
@@ -100,33 +97,38 @@ Can we demonstrate that it works?
 For example:
 
 ```text
-Risk
-Customer A accesses Customer B's data
-
+Customer data has value
         ↓
-
-Design / implementation
+Another tenant must not access it
+        ↓
 A resource is retrieved only by its ID
-
         ↓
-
-Problem
 Tenant ownership is not verified
-
         ↓
-
-Treatment
-Access to the resource is bound to the current organization
-
+Access is bound to the current organization
         ↓
-
-Evidence
-A cross-tenant request is rejected by an automated test
+A cross-tenant request is rejected by a test
 ```
 
-The interesting part is not the security control itself.
+The interesting part is not the control itself.
 
 It is the reasoning that led to it.
+
+## The product
+
+RedRocket stays intentionally small.
+
+The MVP allows an organization to:
+
+* manage users
+* manage contacts
+* create campaigns
+
+No real email delivery yet.
+
+The first version is a monolith with one application and one database.
+
+The application only needs enough functionality to expose meaningful security problems.
 
 ## The deliverable
 
@@ -146,22 +148,27 @@ saas-security-lab/
 
 The application and its security tests will also provide a reusable workload for a separate **DevSecOps lab**.
 
-This repository focuses on designing and implementing the security properties.
+This repository focuses on:
 
-The DevSecOps lab will focus on continuously verifying them during development.
+**understanding the business → designing the product → identifying risk → treating it → demonstrating the result**
+
+The DevSecOps lab will focus on continuously verifying those security properties during development.
 
 ## Current status
 
-The foundations of RedRocket are now defined:
+The first foundations are defined:
 
-* business context
-* minimum viable product
+* business problem
+* product value
+* MVP
 * architecture foundations
 * three critical security risks
 * architecture decision process
 * monolithic architecture
 
-The next step is to choose the minimum application stack and start building.
+Next:
+
+**Choose the minimum application stack and start building.**
 
 Project documentation:
 
