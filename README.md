@@ -6,9 +6,9 @@ A hands-on project to understand how security fits into a modern SaaS environmen
 
 I start from a blank page, build the smallest useful product, observe the security problems that appear, and improve it step by step.
 
-The goal is not to know everything about SaaS security.
+The goal is not to do a seminar about SaaS security.
 
-The goal is to understand how to integrate security into the product from the beginning.
+The goal is to learn by doing and understand how security can be built into the product from the beginning.
 
 This is **Security by Design**.
 
