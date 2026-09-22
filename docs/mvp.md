@@ -1,7 +1,6 @@
 # Minimum Viable Product
 
-RedRocket now needs a first version that is small enough to understand and
-useful enough to observe.
+RedRocket now needs a first version that is small enough to understand and useful enough to observe.
 
 ## Product
 
@@ -56,7 +55,6 @@ Those can appear later if the product gives us a reason to add them.
 
 ## Next
 
-Build the smallest working version, then observe what concrete security problems appear.
+Build the smallest working version, then observe where concrete security problems appear.
 
-Significant architecture decisions made along the way are recorded as
-Architecture Decision Records.
+Significant architecture decisions made along the way are recorded as Architecture Decision Records.
