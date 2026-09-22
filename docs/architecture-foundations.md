@@ -78,6 +78,14 @@ Members work with contacts and campaigns.
 
 Administrators can also manage users, roles and organization settings.
 
+```mermaid
+flowchart LR
+    U["User"] --> I["Identity"]
+    I --> M["Member capabilities"]
+    I --> A["Admin capabilities"]
+    A --> P["Privileged actions"]
+```
+
 RedRocket therefore needs to answer two basic questions:
 
 - Who is acting?
@@ -128,7 +136,12 @@ That creates a trust relationship between the application and the data it can re
 
 ```mermaid
 flowchart LR
-    A["RedRocket Application"] --> D["Database"]
+    X["Application compromise"] -.-> A["RedRocket Application"]
+
+    A --> C["Contacts"]
+    A --> P["Campaigns"]
+    A --> O["Organizations"]
+    A --> U["Users"]
 ```
 
 The amount of access given to the application will influence the impact of a compromise.
