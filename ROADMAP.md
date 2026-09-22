@@ -95,7 +95,7 @@ A growing number of features alone is not sufficient reason to introduce microse
 
 If one of these constraints appears, the relevant capability may be extracted and the new architecture, trust relationships and security implications will be documented in a new ADR.
 
-This evolution will also provide the natural transition towards the future DevOps / DevSecOps lab, where distributed services, CI/CD and infrastructure concerns will become part of the problem to solve.
+**This evolution will also provide the natural transition towards the future DevOps / DevSecOps lab, where distributed services, CI/CD and infrastructure concerns will become part of the problem to solve.**
 
 Next:
 
