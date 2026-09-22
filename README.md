@@ -22,18 +22,35 @@ More detail is available in [Business Context](docs/business-context.md).
 
 ## Security scope
 
-The first iterations focus on three critical outcomes.
+RedRocket is intentionally scoped around **three critical security outcomes**.
 
-**Unauthorized access to customer data.**
+They represent the three situations we primarily want to prevent during the first iterations of the lab.
+
+### 1. Unauthorized access to customer data
+
+**Attacker goal:** access data belonging to another organization.
+
 A user from one organization must not be able to access data belonging to another organization.
 
-**Unauthorized privileged control.**
-An attacker must not be able to obtain or abuse administrative capabilities.
+---
 
-**Broad compromise from a limited foothold.**
+### 2. Unauthorized privileged control
+
+**Attacker goal:** obtain or abuse administrative capabilities.
+
+Privileged functions must remain under the control of authorized users.
+
+---
+
+### 3. Broad compromise from a limited foothold
+
+**Attacker goal:** turn a limited compromise into wider access.
+
 Compromising one part of RedRocket should not unnecessarily provide access to the rest of the application or its data.
 
-These three outcomes do not attempt to represent every SaaS threat. They provide a deliberately limited scope that is sufficient to demonstrate the reasoning.
+---
+
+These three outcomes do not attempt to represent every possible SaaS threat. They provide a deliberately limited scope that is sufficient to demonstrate the Security by Design reasoning of the lab.
 
 ## Security by Design
 
