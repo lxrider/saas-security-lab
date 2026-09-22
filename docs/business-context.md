@@ -48,7 +48,7 @@ It is:
 
 > "What would an attacker want from RedRocket?"
 
-In other words: what are the attacker's objectives?
+In other words: **what are the attacker's objectives?**
 
 For the current version, they are simple:
 
