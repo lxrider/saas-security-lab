@@ -21,12 +21,8 @@ Every user, contact and campaign belongs to one organization.
 
 Two roles are enough for the first version:
 
-- Member
-- Admin
-
-Members can work with contacts and campaigns inside their organization.
-
-Admins can additionally manage users and roles.
+- **Member:** works with contacts and campaigns inside the organization.
+- **Admin:** can additionally manage users and roles.
 
 ## Scope
 
@@ -60,6 +56,8 @@ Those can appear later if the product gives us a reason to add them.
 
 ## Next
 
-Build the smallest working version.
+Build the smallest working version, then observe what new security problems
+appear.
 
-Then observe what new security problems appear.
+Significant architecture decisions made along the way are recorded as
+Architecture Decision Records.
