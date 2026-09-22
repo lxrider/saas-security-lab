@@ -8,7 +8,7 @@ The project starts from the value the product is meant to create for the custome
 
 The approach is deliberately simple:
 
-**Understand → Sketch → Identify → Build → Observe → Iterate**
+> **Understand → Sketch → Identify → Build → Observe → Iterate**
 
 ## Start with business value
 
