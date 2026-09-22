@@ -2,112 +2,48 @@
 
 A hands-on project to understand how security fits into a modern SaaS environment.
 
-**RedRocket Engage** is a small fictional multi-tenant B2B SaaS application.
+**RedRocket Engage** is a small fictional multi-tenant B2B SaaS application. I start from a blank page, build the smallest useful product, observe the security problems that appear, and improve it step by step.
 
-I start from a blank page, build the smallest useful product, observe the security problems that appear, and improve it step by step.
-
-The goal is not to do a seminar about SaaS security.
-
-The goal is to learn by doing and understand how security can be built into the product from the beginning.
+If you just want to know what can be broken today, run a penetration test. Here, the goal is to understand why security problems appear in the first place and how security can be built into the product from the beginning.
 
 This is **Security by Design**.
 
 ## The product
 
-RedRocket Engage stays intentionally small.
+RedRocket Engage stays intentionally small. A customer organization can manage users, contacts and campaigns. No real email delivery yet. That's probably a topic for a future iteration.
 
-A customer organization can:
-
-- manage users
-- manage contacts
-- create campaigns
-
-No real email delivery yet. That's probably a topic for a future lab.
-
-The application is just complex enough to explore real SaaS security problems without
-spending weeks building the product itself.
+The application is just complex enough to explore real SaaS security problems without spending weeks building the product itself.
 
 ## Approach
 
-I want to understand SaaS security from the foundations up.
+The idea is simple: start from the foundations and avoid jumping directly to security tools, frameworks or advanced cloud architecture.
 
-Starting from a blank page means resisting the temptation to jump directly
-to security tools, frameworks or advanced cloud architecture.
+First, understand what we are building, who will use it, what data it will handle, what the smallest architecture looks like, what each component has to trust, and what security problems already appear.
 
-The first questions are much simpler:
+The first security problems are visible before writing code. The MVP will create new questions, and those questions will drive the next security decisions.
 
-- What are we building?
-- Who will use it?
-- What data will it handle?
-- What is the smallest architecture that can make it work?
-- What does each component have to trust?
-- What security problems already appear at that point?
-
-Before writing the application, the first security problems are already visible
-in its design.
-
-Only then does it make sense to build.
-
-The MVP will create new questions, and those questions will drive the next
-security decisions.
-
-I'd rather understand the first 50 cm properly than jump straight to 1.5 m
-without understanding what is underneath.
+I'd rather understand the first 50 cm properly than jump straight to 1.5 m without understanding what is underneath.
 
 ```mermaid
 flowchart LR
-    A["Understand"] --> B["Design"]
-    B --> C["Build"]
-    C --> D["Review"]
-    D --> E["Detect"]
-    E --> F["Improve"]
+    A["Understand"] --> B["Sketch"]
+    B --> C["Identify problems"]
+    C --> D["Build"]
+    D --> E["Observe"]
+    E --> F["Iterate"]
+    F --> B
 ```
 
 ## What I want to explore
 
-As RedRocket grows, the project may eventually lead me into areas such as:
+As RedRocket grows, the project may lead into areas such as multi-tenant security, authentication and authorization, RBAC, API security, cloud security, IAM, secrets management, vulnerability management, CI/CD security, logging, detection and incident response.
 
-- multi-tenant security
-- authentication and authorization
-- RBAC
-- API security
-- AWS and cloud security
-- IAM and least privilege
-- secrets management
-- vulnerability management
-- SAST and SCA
-- CI/CD security
-- logging and detection
-- incident response
-
-These topics are not a checklist.
-
-They should appear because the architecture or the application creates a real
-security problem that needs to be understood.
-
-## The red rocket
-
-This is my red rocket project 🚀
-
-A trip into parts of security I haven't explored deeply yet.
-
-Starting from a blank page means facing the same questions architects and
-developers face: what are we building, for whom, with what data, how should
-users access it, and how should the different parts of the system trust each other?
+These topics are not a checklist. They should appear because the product or architecture creates a real problem that needs to be understood.
 
 ## Current status
 
-**Step 2: Design the foundations**
+The business context and first architecture foundations are defined. The current work is focused on the smallest possible MVP and the first security problems visible before coding.
 
-The business context is defined.
-
-The current work is focused on the smallest possible architecture and the first
-security problems that appear before writing the MVP.
-
-See:
-
-- [Business Context](docs/business-context.md)
-- [Architecture Foundations](docs/architecture-foundations.md)
-- [Roadmap](ROADMAP.md)
+See [Business Context](docs/business-context.md), [Architecture Foundations](docs/architecture-foundations.md), [Security Problems](docs/security-problems.md), [Roadmap](ROADMAP.md) and [Architecture Decisions](docs/adr/).
 
 ## Build. Break. Understand. Rebuild better.
