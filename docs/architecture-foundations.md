@@ -66,7 +66,7 @@ A user from one organization must not be able to access data belonging to anothe
 
 This concern is directly related to the first critical outcome:
 
-**Unauthorized access to customer data.**
+> **Unauthorized access to customer data.**
 
 At this stage, there is no confirmed vulnerability. There is a design property that must remain true when the application is implemented.
 
@@ -97,7 +97,7 @@ What matters is that privileged capabilities exist, and the product must keep th
 
 This concern is directly related to the second critical outcome:
 
-**Unauthorized privileged control.**
+> **Unauthorized privileged control.**
 
 ## The smallest technical architecture
 
@@ -150,7 +150,7 @@ If one part of RedRocket is compromised, that should not automatically provide u
 
 This concern is directly related to the third critical outcome:
 
-**Broad compromise from a limited foothold.**
+> **Broad compromise from a limited foothold.**
 
 The actual blast radius will depend on the implementation choices made during the build.
 
