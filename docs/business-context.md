@@ -41,7 +41,7 @@ These expectations define the first security concerns of the lab:
 - keeping privileged capabilities under authorized control
 - limiting the impact of a compromise
 
-These concerns are developed in [Security Problems](security-problems.md).
+These concerns are developed in [Security Concerns](security-concerns.md).
 
 ## Constraint
 
