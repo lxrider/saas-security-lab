@@ -82,10 +82,10 @@ This is authorization. Later this may lead to roles and permissions, but the req
 
 Contacts contain customer-owned information such as:
 
-- first name
-- last name
-- email address
-- company
+- *first name*
+- *last name*
+- *email address*
+- *company*
 
 This immediately creates more questions:
 
