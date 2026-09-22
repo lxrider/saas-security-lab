@@ -6,10 +6,9 @@ RedRocket starts with one simple idea:
 
 > a customer uses a service and trusts it with data.
 
-Before choosing a framework, a cloud provider or a security product, I want to
-understand what this simple relationship already implies. At this point there is
-no AWS architecture, no container platform, no CI/CD pipeline and no security
-tooling.
+Before choosing a framework, a cloud provider or a security product, I want to understand what this simple relationship already implies.
+
+At this point there is no AWS architecture, no container platform, no CI/CD pipeline and no security tooling.
 
 There is only a business need and a system that has to satisfy it.
 
@@ -23,25 +22,21 @@ flowchart LR
     R --> D["Customer data"]
 ```
 
-Even this creates security questions. The customer expects the data to:
+The customer expects RedRocket to store and use that data in a way that supports the business need.
 
-- remain confidential
-- remain correct
-- remain available when needed
-
-Confidentiality, integrity and availability do not come from a security
-framework. They come directly from what the product is supposed to do.
+This already creates trust.
 
 ## The smallest product
 
-RedRocket is a multi-tenant SaaS application. Each customer has its own
-organization containing:
+RedRocket is a multi-tenant SaaS application.
+
+Each customer has its own organization containing:
 
 - users
 - contacts
 - campaigns
 
-The first version does not send real email. That is enough for now.
+The first version does not send real email.
 
 ```mermaid
 flowchart TD
@@ -50,7 +45,9 @@ flowchart TD
     O --> M["Campaigns"]
 ```
 
-## First security problem: tenant isolation
+This is enough to start seeing where security matters.
+
+## First security concern: customer and tenant boundaries
 
 RedRocket serves more than one customer.
 
@@ -63,52 +60,36 @@ flowchart TD
     B --> BD["Customer B data"]
 ```
 
-That immediately creates an important security property: **a user from one
-organization must never be able to access data belonging to another
-organization.**
+The moment several organizations share the same service, RedRocket must preserve a clear boundary between them.
 
-This is tenant isolation. We have not written any code yet, but one of the most
-important security requirements of the application already exists.
+A user from one organization must not be able to access data belonging to another organization.
 
-## Second security problem: identity
+This concern is directly related to the first critical outcome:
 
-An organization contains users, so RedRocket needs to know who is interacting
-with the application. The first question is simple: **Who are you?**
+**Unauthorized access to customer data.**
 
-This is authentication. Without a reliable identity, the application cannot
-make meaningful access decisions.
+At this stage, there is no confirmed vulnerability. There is a design property that must remain true when the application is implemented.
 
-## Third security problem: permissions
+## Second security concern: identity and privileged capabilities
 
-Knowing who the user is is not enough. Two users from the same organization may
-not have the same responsibilities.
+An organization contains users with different responsibilities.
 
-RedRocket therefore also needs to answer: **What are you allowed to do?**
+Members work with contacts and campaigns.
 
-This is authorization. Later this may lead to roles and permissions, but the
-requirement exists before choosing how to implement them.
+Administrators can also manage users, roles and organization settings.
 
-## Fourth security problem: customer data
+RedRocket therefore needs to answer two basic questions:
 
-Contacts contain customer-owned information such as:
+- Who is acting?
+- What is this identity allowed to do?
 
-- first name
-- last name
-- email address
-- company
+The implementation is not decided yet.
 
-This immediately creates more questions:
+What matters is that privileged capabilities exist, and the product must keep them under authorized control.
 
-- Who can read this data?
-- Who can modify it?
-- Who can export it?
-- What happens if it is modified incorrectly?
-- What happens if it is lost?
-- What should appear in logs?
-- How long should it be kept?
+This concern is directly related to the second critical outcome:
 
-Data protection is therefore part of the application design, not something
-added after deployment.
+**Unauthorized privileged control.**
 
 ## The smallest technical architecture
 
@@ -127,44 +108,42 @@ Three technical components are enough:
 2. an application
 3. a database
 
-The technology used to implement them is secondary for now. The goal is to
-understand the relationships between them.
+The technology used to implement them is secondary for now.
+
+The goal is to understand the relationships between them.
 
 ## Browser to application
 
-The browser sends requests and data to RedRocket. The application cannot assume
-that everything received from the browser is legitimate.
+The browser is controlled by the user and sits outside the application's trust boundary.
 
-This creates questions around:
+Requests and data coming from it cannot automatically be trusted.
 
-- identity
-- sessions
-- permissions
-- input validation
-- unexpected or malicious requests
+This does not yet define a specific security problem. It identifies a boundary that will need to be observed during implementation.
 
-The browser is outside the application's trust boundary.
+## Third security concern: application and data trust
 
-## Application to database
+The application needs to read and modify customer data stored in the database.
 
-The application needs to read and modify stored data. That creates another
-trust relationship.
+That creates a trust relationship between the application and the data it can reach.
 
-The database needs to know which application can connect to it, and the
-application needs some way to access it. This creates questions around:
+```mermaid
+flowchart LR
+    A["RedRocket Application"] --> D["Database"]
+```
 
-- database authentication
-- credentials
-- secrets
-- least privilege
-- database exposure
+The amount of access given to the application will influence the impact of a compromise.
 
-The implementation is not decided yet. The important point is that a trust
-relationship now exists.
+If one part of RedRocket is compromised, that should not automatically provide unnecessary access to the rest of the application or its data.
+
+This concern is directly related to the third critical outcome:
+
+**Broad compromise from a limited foothold.**
+
+The actual blast radius will depend on the implementation choices made during the build.
 
 ## The first trust boundaries
 
-The first architecture therefore contains two obvious trust boundaries:
+The smallest architecture contains two obvious trust boundaries:
 
 ```mermaid
 flowchart LR
@@ -174,10 +153,12 @@ flowchart LR
 
 Each boundary is a place where assumptions have to be questioned:
 
-- What information crosses it?
-- Who controls that information?
+- What crosses the boundary?
+- Who controls it?
 - Why should the receiving component trust it?
 - What happens if that trust is abused?
+
+These questions help identify where concrete security problems may appear once the application exists.
 
 ## What is deliberately missing
 
@@ -190,34 +171,26 @@ The architecture does not currently include:
 - security testing tooling
 - WAF, SIEM, logging or detection tooling
 
-Those may appear later if the product gives us a reason to add them.
+Those components are not excluded permanently.
+
+They will only be introduced if the product or architecture creates a reason for them to exist.
 
 ## What we have learned before coding
 
-Starting from only a customer, an application and some data has already
-revealed several security concerns:
+The smallest RedRocket design already reveals three areas that deserve security attention:
 
-- confidentiality
-- integrity
-- availability
-- tenant isolation
-- authentication
-- authorization
-- customer data protection
-- input validation
-- secrets
-- least privilege
-- trust boundaries
+- customer and tenant boundaries
+- identity and privileged capabilities
+- application and data trust
 
-None of these appeared because a security checklist told us to add them. They
-appeared because of the way the product has to work.
+These are security concerns, not confirmed vulnerabilities.
+
+They exist because of the way the product works and the trust relationships created by the architecture.
 
 ## What comes next
 
-The first MVP is now defined.
+The MVP is defined and the first architecture decision has been made: RedRocket will start as a monolith.
 
-The next step is to make the minimum architecture decisions required to build
-it. Significant decisions will be documented as Architecture Decision Records.
+The next step is to choose the minimum application stack and build the first working version.
 
-Then we build, observe what changes and add new security problems when they
-actually appear.
+From there, we will observe where concrete security problems appear, treat them and demonstrate the result.
