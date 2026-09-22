@@ -198,7 +198,7 @@ The product architecture then shows us where these objectives may be challenged:
 
 None of these are confirmed vulnerabilities yet.
 
-The next step is to build and observe where concrete security problems actually appear.
+The next step is to build and identify where the design or implementation creates concrete vulnerabilities.
 
 ## What comes next
 
