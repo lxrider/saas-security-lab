@@ -1,91 +1,71 @@
 # Business Context
 
-Before thinking about architecture, cloud services or security controls, I first
-need to understand what RedRocket is supposed to do and what actually matters.
+## The problem
 
-## RedRocket Engage 🚀
+Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools.
 
-RedRocket Engage is a fictional European B2B SaaS application. Companies use it
-to manage contacts and prepare simple marketing campaigns.
+This makes it harder to:
 
-Each customer has its own organization containing:
+* keep customer information in one place
+* share it safely between team members
+* know who can access or modify it
+* prepare customer engagement campaigns consistently
 
-- users
-- contacts
-- campaigns
+RedRocket Engage 🚀 provides a shared workspace where an organization can manage its users, contacts and campaigns.
 
-For now, campaigns are only prepared. No real email delivery yet. That's
-probably a topic for a future iteration.
+## The value
 
-## Users
+RedRocket creates value by centralizing customer information and making it available to the people who need it.
 
-There are two types of users for the first version:
+A customer therefore relies on RedRocket to:
 
-- **Members** work with contacts and campaigns inside their organization.
-- **Administrators** can also manage users, roles and organization settings.
+* store customer information
+* make it available to authorized users
+* preserve the integrity of that information
+* keep one organization's data separate from another
 
-That is enough for now.
+The product becomes part of the customer's business operations.
 
-## What matters
+## The trust created by the product
 
-RedRocket only works as a product if customers can trust it. That means:
+By using RedRocket, a customer gives the service access to business data and business capabilities.
 
-- customer data stays confidential
-- one customer cannot access another customer's data
-- important data is not modified unexpectedly
-- privileged actions are controlled
-- the service remains available
+This creates several expectations:
 
-These requirements already exist before choosing any security technology.
+* another customer must not be able to access its data
+* unauthorized users must not gain control over privileged functions
+* a compromise of one part of the service should not unnecessarily expose everything else
 
-## What would an attacker want?
+These expectations define the first security scope of the lab.
 
-The useful question is not:
+## Critical security outcomes
 
-> "What can I break?"
+For the MVP, RedRocket focuses on three outcomes that should not be possible.
 
-It is:
+### 1. Unauthorized access to customer data
 
-> "What would an attacker want from RedRocket?"
+A user from one organization must not be able to access data belonging to another organization.
 
-In other words: what are the **attacker's objectives?**
+### 2. Unauthorized privileged control
 
-For the current version, they are simple:
+An attacker must not be able to obtain or abuse administrative capabilities.
 
-- steal customer data
-- access another tenant's data
-- take control of a user or administrator account
-- modify contacts or campaigns
-- abuse privileged functionality
-- disrupt the service or destroy data
+### 3. Broad compromise from a limited foothold
 
-These objectives will evolve with the product. New capabilities will create
-new attacker objectives and new security problems.
+Compromising one part of RedRocket should not unnecessarily provide access to the rest of the application or its data.
 
-## Regulatory context
+These are not intended to represent every possible SaaS threat.
 
-RedRocket operates in Europe, where some customers may be subject to regulations
-such as NIS2.
+They are the first risks derived from the business value and trust model of RedRocket.
 
-Even if RedRocket itself is not necessarily a regulated entity, customers may
-expect their SaaS suppliers to demonstrate appropriate security practices,
-particularly around risk management, secure development and supply chain security.
+## Security approach
 
-For this lab, NIS2 is not a checklist. It is one more business reason to
-understand security early and build it into the product from the beginning.
+The lab does not start from a framework or a predefined list of controls.
 
-## Constraint
+It starts from the business problem, the value delivered by the product and the trust placed in it.
 
-RedRocket should remain small enough to understand. The goal is not to add
-complexity faster than the product itself.
+From there, we identify where the design creates paths toward the critical outcomes above.
 
-Security controls should stay understandable, maintainable and proportionate
-to the problems they are meant to solve.
+The process is:
 
-## First principle
-
-Security starts with understanding the business first: 
-- what matters?
-- what is at stake?
-- what the product does?
-- who relies on it?
+**Understand → Sketch → Identify problems → Build → Observe → Iterate**
