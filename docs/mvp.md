@@ -56,8 +56,7 @@ Those can appear later if the product gives us a reason to add them.
 
 ## Next
 
-Build the smallest working version, then observe what new security problems
-appear.
+Build the smallest working version, then observe what concrete security problems appear.
 
 Significant architecture decisions made along the way are recorded as
 Architecture Decision Records.
