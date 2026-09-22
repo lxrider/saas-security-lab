@@ -19,7 +19,7 @@ flowchart LR
 
 ## 1. Understand
 
-Start with the business.
+Start with the business:
 
 - What are we building?
 - Who is it for?
@@ -27,19 +27,14 @@ Start with the business.
 - What data does it handle?
 - What really matters?
 
-Do not think about security products yet.
+Do not start with AWS, OWASP or security products. First understand the problem.
 
-Do not think about AWS yet.
-
-Do not think about OWASP yet.
-
-First understand the problem.
+**Status: done for the first iteration.**
 
 ## 2. Sketch
 
-Draw the smallest possible product and architecture.
-
-Only add a component when the product actually needs it.
+Draw the smallest possible product and architecture. Only add a component when
+the product actually needs it.
 
 For each component, understand:
 
@@ -48,9 +43,10 @@ For each component, understand:
 - what it communicates with
 - what it has to trust
 
-The goal is not to design the final architecture.
+The goal is not to design the final architecture. The goal is to understand
+the next 50 cm.
 
-The goal is to understand the next 50 cm.
+**Status: first foundations defined.**
 
 ## 3. Identify problems
 
@@ -66,60 +62,75 @@ Ask:
 - What are we trusting?
 - What happens if that trust is wrong?
 
-Document the problems.
+Document the problems. Do not solve all of them yet.
 
-Do not solve all of them yet.
+**Status: first security problems documented.**
 
 ## 4. Build
 
-Build the smallest useful version of RedRocket.
+The first MVP is now defined.
 
-Implementation decisions will create new relationships, dependencies and
-assumptions.
+The next step is to make only the architecture decisions required to build it.
+Important decisions are recorded as ADRs so that both the choice and its
+security consequences remain understandable.
+
+The first decision is to keep the MVP as a monolith rather than introduce
+microservices before the product needs them.
+
+Next:
+
+- choose the minimum application stack
+- build the smallest working version
+- avoid unnecessary infrastructure
+- document new security problems as they appear
+
+Implementation will create new relationships, dependencies and assumptions.
 
 That is expected.
 
 ## 5. Observe
 
-Look at what actually exists now.
+Once the MVP exists, look at what actually changed:
 
-Ask again:
-
-- What changed?
 - What new security problems appeared?
+- What new trust relationships exist?
 - What assumptions turned out to be wrong?
 - What became more important?
 - What became unnecessary?
 
-Add those problems to the project.
+Update the architecture and security problems from what actually exists.
 
 ## 6. Iterate
 
-Improve the product and the architecture one step at a time.
+Improve the product and architecture one step at a time.
 
-Security controls, frameworks and technologies should appear when there is
-a real problem that gives them a reason to exist.
+Security controls, frameworks and technologies should appear when there is a
+real problem that gives them a reason to exist.
 
-The architecture is not known in advance.
-
-Neither is the final security architecture.
+The final architecture is not known in advance. Neither is the final security
+architecture.
 
 Both will emerge as RedRocket grows.
 
 ## Current step
 
-**Sketch → Define the MVP**
+**Build**
 
-The first business context, architecture and security problems are now visible.
+The business context, architecture foundations, first security problems and MVP
+are defined.
 
-Before writing code, I only need to define the smallest version of RedRocket
-that can actually work:
+The project is now moving from design into implementation:
 
-- the minimum data model
-- the minimum user roles
-- the minimum permissions
-- the exact MVP scope
+```text
+MVP
+ ↓
+Architecture decision
+ ↓
+Build
+ ↓
+Observe
+ ↓
+New security problems
+```
 
-Nothing more.
-
-Then we build.
+Keep it small. Build the first working RedRocket.
