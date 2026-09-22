@@ -1,71 +1,104 @@
 # Business Context
 
-## The problem
+Security starts with understanding the business first: what problem the product solves, what creates value for the customer and what the customer needs to trust.
+
+## The business problem
 
 Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools.
 
-This makes it harder to:
+This makes it harder to keep customer information in one place, share it between team members and prepare customer engagement campaigns consistently.
 
-* keep customer information in one place
-* share it safely between team members
-* know who can access or modify it
-* prepare customer engagement campaigns consistently
+RedRocket Engage 🚀 provides a common workspace where an organization can manage its users, contacts and campaigns.
 
-RedRocket Engage 🚀 provides a shared workspace where an organization can manage its users, contacts and campaigns.
+For the first version, campaigns are prepared inside RedRocket but no real email delivery takes place.
 
-## The value
+## The business value
 
-RedRocket creates value by centralizing customer information and making it available to the people who need it.
+RedRocket creates value by centralizing customer information and making it available to the people who need it inside the organization.
 
-A customer therefore relies on RedRocket to:
+Each customer has its own organization containing:
 
-* store customer information
-* make it available to authorized users
-* preserve the integrity of that information
-* keep one organization's data separate from another
+- users
+- contacts
+- campaigns
 
-The product becomes part of the customer's business operations.
+Two user roles are sufficient for the first version:
+
+- **Members** work with contacts and campaigns.
+- **Administrators** can also manage users, roles and organization settings.
+
+The product therefore becomes a shared point of access to customer data and business operations.
 
 ## The trust created by the product
 
-By using RedRocket, a customer gives the service access to business data and business capabilities.
+By using RedRocket, customers entrust the service with their data and with the ability to act on that data.
 
-This creates several expectations:
+They expect RedRocket to keep their organization separated from other customers, keep privileged functions under authorized control and avoid turning a limited security problem into a compromise of the whole service.
 
-* another customer must not be able to access its data
-* unauthorized users must not gain control over privileged functions
-* a compromise of one part of the service should not unnecessarily expose everything else
+This trust defines the first security scope of the lab.
 
-These expectations define the first security scope of the lab.
+## Three critical security outcomes
 
-## Critical security outcomes
+RedRocket is intentionally scoped around **three critical security outcomes**.
 
-For the MVP, RedRocket focuses on three outcomes that should not be possible.
+They represent the situations we primarily want to prevent during the first iterations.
 
 ### 1. Unauthorized access to customer data
 
+**Attacker goal:** access data belonging to another organization.
+
 A user from one organization must not be able to access data belonging to another organization.
+
+---
 
 ### 2. Unauthorized privileged control
 
-An attacker must not be able to obtain or abuse administrative capabilities.
+**Attacker goal:** obtain or abuse administrative capabilities.
+
+Privileged functions must remain under the control of authorized users.
+
+---
 
 ### 3. Broad compromise from a limited foothold
 
+**Attacker goal:** turn a limited compromise into wider access.
+
 Compromising one part of RedRocket should not unnecessarily provide access to the rest of the application or its data.
 
-These are not intended to represent every possible SaaS threat.
+---
 
-They are the first risks derived from the business value and trust model of RedRocket.
+These three outcomes do not represent every possible SaaS threat. They deliberately limit the scope so that each risk can be traced from the business need to the design, implementation and evidence that it has been treated.
 
-## Security approach
+## From business to security
 
-The lab does not start from a framework or a predefined list of controls.
+The lab follows a simple line of reasoning:
 
-It starts from the business problem, the value delivered by the product and the trust placed in it.
+```text
+Business problem
+    ↓
+Product value
+    ↓
+Customer trust
+    ↓
+Critical security outcome
+    ↓
+Where does the design make it possible?
+    ↓
+How should the design or implementation change?
+    ↓
+Can we demonstrate that the treatment works?
+```
 
-From there, we identify where the design creates paths toward the critical outcomes above.
+The objective is not to start with a security framework or a catalogue of controls.
 
-The process is:
+Security questions are introduced when the product or its architecture creates a reason for them to exist.
+
+## Constraint
+
+RedRocket should remain small enough to understand.
+
+The objective is not to reproduce a production SaaS platform. It is to build enough of the product to make meaningful security problems visible, treat them and demonstrate the result.
+
+The working approach remains:
 
 **Understand → Sketch → Identify problems → Build → Observe → Iterate**
