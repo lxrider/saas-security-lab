@@ -2,15 +2,16 @@
 
 This project starts from a blank page.
 
-I do not want to define the final architecture, security controls or technology
-stack before understanding why they are needed.
+The objective is not to define the final architecture, security controls or technology stack in advance.
+
+The project starts from the business value RedRocket is meant to create, identifies what must remain true for that value to survive, then builds only enough to observe where concrete vulnerabilities actually appear.
 
 The process is deliberately simple:
 
 ```mermaid
 flowchart LR
     A["Understand"] --> B["Sketch"]
-    B --> C["Identify problems"]
+    B --> C["Identify"]
     C --> D["Build"]
     D --> E["Observe"]
     E --> F["Iterate"]
@@ -21,94 +22,137 @@ flowchart LR
 
 Start with the business:
 
-- What are we building?
+- What problem does RedRocket solve?
 - Who is it for?
-- What does it need to do?
-- What data does it handle?
-- What really matters?
+- What value does it create?
+- What does the customer entrust to it?
+- What must remain true for that value to be preserved?
 
-Do not start with AWS, OWASP or security products. First understand the problem.
+This is where the first security objectives appear.
+
+They exist before the first technical choice because they are derived from the business value and trust created by the product.
 
 **Status: done for the first iteration.**
 
 ## 2. Sketch
 
-Draw the smallest possible product and architecture. Only add a component when
-the product actually needs it.
+Draw the smallest possible product and architecture.
 
-For each component, understand:
+Only add a component when the product actually needs it.
+
+For each component or relationship, understand:
 
 - why it exists
 - what it does
 - what it communicates with
 - what it has to trust
+- which security objective it can affect
 
-The goal is not to design the final architecture. The goal is to understand
-the next 50 cm.
+The goal is not to design the final architecture.
+
+The goal is to understand the next useful step.
 
 **Status: first foundations defined.**
 
-## 3. Identify problems
+## 3. Identify
 
-Before trying to secure anything, identify the security problems created by
-what has just been designed.
+Relate the architecture back to the security objectives.
 
-Ask:
+At this stage, we are not looking for every possible vulnerability.
 
-- What could go wrong?
-- What could be accessed?
-- What could be modified?
-- What could disappear?
-- What are we trusting?
-- What happens if that trust is wrong?
+We identify where the design creates areas that deserve attention:
 
-Document the problems. Do not solve all of them yet.
+- customer and tenant boundaries
+- identity and privileged capabilities
+- application and data trust
 
-**Status: first security problems documented.**
+These are architecture concerns, not confirmed vulnerabilities.
+
+**Status: first architecture concerns identified.**
 
 ## 4. Build
 
-The first MVP is now defined.
+The first MVP is defined.
 
-The next step is to make only the architecture decisions required to build it.
-Important decisions are recorded as ADRs so that both the choice and its
-security consequences remain understandable.
+Only the architecture decisions required to build it should be made.
 
-The first decision is to keep the MVP as a monolith rather than introduce
-microservices before the product needs them.
+Important decisions are recorded as ADRs so that the choice and its security consequences remain understandable.
+
+The first decision is to keep the MVP as a monolith rather than introduce microservices before the product needs them.
 
 Next:
 
 - choose the minimum application stack
 - build the smallest working version
 - avoid unnecessary infrastructure
-- document new security problems as they appear
+- keep the code easy to understand and test
+- observe where concrete vulnerabilities appear
 
-Implementation will create new relationships, dependencies and assumptions.
+Implementation will create real relationships, dependencies and assumptions.
 
-That is expected.
+That is where security stops being theoretical.
+
+**Status: current step.**
 
 ## 5. Observe
 
-Once the MVP exists, look at what actually changed:
+Once the first working slice exists, examine what the implementation actually created.
 
-- What new security problems appeared?
-- What new trust relationships exist?
-- What assumptions turned out to be wrong?
-- What became more important?
-- What became unnecessary?
+Ask:
 
-Update the architecture and security problems from what actually exists.
+- Can one customer reach another customer's data?
+- Can a user obtain or abuse privileged capabilities?
+- Can a limited compromise create unnecessary access elsewhere?
+- Which assumptions made during design were wrong?
+- Which architecture concerns became concrete vulnerabilities?
+- Which concerns did not materialize?
 
-## 6. Iterate
+Document what actually exists.
 
-Improve the product and architecture one step at a time.
+Do not add controls for problems that have not appeared.
 
-Security controls, frameworks and technologies should appear when there is a
-real problem that gives them a reason to exist.
+## 6. Treat
 
-The final architecture is not known in advance. Neither is the final security
-architecture.
+When a concrete vulnerability is found:
+
+1. relate it to the security objective it threatens
+2. identify why the current design or implementation allows it
+3. apply the smallest appropriate treatment
+4. avoid introducing unnecessary complexity
+
+The treatment should remain understandable from the original business need.
+
+## 7. Demonstrate
+
+A treatment is not complete until its effect can be shown.
+
+Where possible, demonstrate:
+
+```text
+Before
+    ↓
+Vulnerability exists
+    ↓
+Treatment
+    ↓
+After
+    ↓
+Security property verified
+```
+
+Automated tests should be added when they provide useful evidence and prevent the same weakness from being reintroduced.
+
+These tests will later provide a natural bridge to the DevSecOps lab.
+
+## 8. Iterate
+
+Update the product and architecture one step at a time.
+
+New security objectives, architecture concerns, controls or technologies should only appear when the product gives them a reason to exist.
+
+The final architecture is not known in advance.
+
+Neither is the final security architecture.
 
 Both will emerge as RedRocket grows.
 
@@ -116,21 +160,28 @@ Both will emerge as RedRocket grows.
 
 **Build**
 
-The business context, architecture foundations, first security problems and MVP
-are defined.
+The business context, MVP, three security objectives and first architecture concerns are defined.
 
 The project is now moving from design into implementation:
 
 ```text
-MVP
- ↓
-Architecture decision
- ↓
+Business value
+    ↓
+Security objectives
+    ↓
+Architecture concerns
+    ↓
 Build
- ↓
-Observe
- ↓
-New security problems
+    ↓
+Concrete vulnerabilities
+    ↓
+Treatment
+    ↓
+Evidence
+    ↓
+Iterate
 ```
 
-Keep it small. Build the first working RedRocket.
+Next:
+
+**Choose the minimum application stack and build the first working RedRocket slice.**
