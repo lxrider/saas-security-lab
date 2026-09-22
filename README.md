@@ -2,7 +2,7 @@
 
 This project explores a simple **Security by Design** approach through the construction of a small SaaS application.
 
-RedRocket Engage is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture, nor to apply a catalogue of controls. The project starts from the business problem, identifies what creates value for the customer, observes where security problems appear in the design, and improves the product progressively.
+RedRocket Engage 🚀 is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture, nor to apply a catalogue of controls. The project starts from the business problem, identifies what creates value for the customer, observes where security problems appear in the design, and improves the product progressively.
 
 The approach is deliberately simple:
 
