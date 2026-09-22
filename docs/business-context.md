@@ -1,13 +1,10 @@
 # Business Context
 
-Before thinking about architecture, cloud services or security controls, I first
-need to understand what RedRocket is supposed to do and what actually matters.
+Before thinking about architecture, cloud services or security controls, I first need to understand what RedRocket is supposed to do and what actually matters.
 
 ## RedRocket Engage 🚀
 
-RedRocket Engage is a fictional European B2B SaaS application.
-
-Companies use it to manage contacts and prepare simple marketing campaigns.
+RedRocket Engage is a fictional European B2B SaaS application. Companies use it to manage contacts and prepare simple marketing campaigns.
 
 Each customer has its own organization containing:
 
@@ -15,25 +12,17 @@ Each customer has its own organization containing:
 - contacts
 - campaigns
 
-For now, campaigns are only prepared.
-
-No real email delivery yet. That's probably a topic for a future iteration.
+For now, campaigns are only prepared. No real email delivery yet. That's probably a topic for a future iteration.
 
 ## Users
 
-There are two types of users for the first version.
-
-**Members** work with contacts and campaigns inside their organization.
-
-**Administrators** can also manage users, roles and organization settings.
+There are two types of users for the first version. **Members** work with contacts and campaigns inside their organization. **Administrators** can also manage users, roles and organization settings.
 
 That is enough for now.
 
 ## What matters
 
-RedRocket only works as a product if customers can trust it.
-
-That means:
+RedRocket only works as a product if customers can trust it. That means:
 
 - customer data stays confidential
 - one customer cannot access another customer's data
@@ -53,9 +42,9 @@ It is:
 
 > "What would an attacker want from RedRocket?"
 
-In other words his **objectives**.
+In other words: what are the attacker's objectives?
 
-For the current version, the main objectives are simple:
+For the current version, they are simple:
 
 - steal customer data
 - access another tenant's data
@@ -64,21 +53,14 @@ For the current version, the main objectives are simple:
 - abuse privileged functionality
 - disrupt the service or destroy data
 
-These objectives will evolve with the product.
-
-New capabilities will create new attacker objectives and new security problems.
+These objectives will evolve with the product. New capabilities will create new attacker objectives and new security problems.
 
 ## Constraint
 
-RedRocket should remain small enough to understand.
+RedRocket should remain small enough to understand. The goal is not to add complexity faster than the product itself.
 
-The goal is not to add complexity faster than the product itself.
-
-Security controls should stay understandable, maintainable and proportionate
-to the problems they are meant to solve.
+Security controls should stay understandable, maintainable and proportionate to the problems they are meant to solve.
 
 ## First principle
 
-Security starts with understanding the business first:
-
-what matters, what is at stake, what the product does and who relies on it.
+Security starts with understanding the business first: what matters, what is at stake, what the product does and who relies on it.
