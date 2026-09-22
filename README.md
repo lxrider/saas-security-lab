@@ -2,11 +2,11 @@
 
 This project explores a simple **Security by Design** approach through the construction of a small SaaS application.
 
-RedRocket Engage 🚀 is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture, nor to apply a catalogue of controls. The project starts from the business problem, identifies what creates value for the customer, observes where security problems appear in the design, and improves the product progressively.
+RedRocket Engage 🚀 is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture, nor to apply a catalogue of controls. The project starts from the business problem, identifies what creates value for the customer, observes where security concerns appear in the design, and improves the product progressively.
 
 The approach is deliberately simple:
 
-> **Understand → Sketch → Identify problems → Build → Observe → Iterate**
+**Understand → Sketch → Identify concerns → Build → Observe → Iterate**
 
 ## Business context
 
@@ -72,29 +72,27 @@ flowchart LR
 
 A security topic is therefore introduced only when the product or architecture gives it a reason to exist.
 
-## From risk to implementation
+## From concern to implementation
 
-Each problem should remain traceable to a business concern.
+A security concern is not necessarily a vulnerability or a confirmed problem.
 
-The reasoning is kept intentionally short:
+It identifies an area where the product or architecture could create a path towards one of the three critical outcomes. Concrete security problems are documented when they appear during implementation and observation.
+
+The reasoning remains intentionally short:
 
 ```text
 Business value
     ↓
-Critical risk
+Critical outcome
     ↓
-Where does it appear?
+Security concern
     ↓
-Why does the current design allow it?
+Concrete problem
     ↓
-What is the smallest appropriate treatment?
+Smallest appropriate treatment
     ↓
-Can we demonstrate that it works?
+Evidence
 ```
-
-For example, customer data has value and must remain isolated between organizations. If a resource is retrieved only from its identifier, without checking its organization, a cross-tenant access path appears.
-
-The treatment is then introduced where the problem exists, and an automated test demonstrates that the unwanted access is no longer possible.
 
 The objective is not to showcase the control itself. The objective is to make the reasoning from business requirement to technical decision visible.
 
@@ -126,7 +124,7 @@ saas-security-lab/
 
 The application and its security tests will later be reused as a workload for a separate DevSecOps lab.
 
-This repository therefore focuses on understanding the business, designing the product, identifying security problems and treating them. The DevSecOps lab will focus on continuously verifying that these security properties remain valid during development.
+This repository therefore focuses on understanding the business, designing the product, identifying security concerns and problems, and treating them. The DevSecOps lab will focus on continuously verifying that these security properties remain valid during development.
 
 ## Current status
 
@@ -136,9 +134,9 @@ The next step is to choose the minimum application stack and start building.
 
 Documentation:
 
-* [Business Context](docs/business-context.md)
-* [Architecture Foundations](docs/architecture-foundations.md)
-* [Minimum Viable Product](docs/mvp.md)
-* [Security Problems](docs/security-problems.md)
-* [Roadmap](ROADMAP.md)
-* [Architecture Decisions](docs/adr/)
+- [Business Context](docs/business-context.md)
+- [Architecture Foundations](docs/architecture-foundations.md)
+- [Minimum Viable Product](docs/mvp.md)
+- [Security Concerns](docs/security-concerns.md)
+- [Roadmap](ROADMAP.md)
+- [Architecture Decisions](docs/adr/)
