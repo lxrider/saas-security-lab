@@ -22,9 +22,9 @@ flowchart LR
     R --> D["Customer data"]
 ```
 
-The customer expects RedRocket to store and use that data in a way that supports the business need.
+The customer expects RedRocket to store and use that data in a way that preserves the value of the service.
 
-This already creates trust.
+The first security objectives therefore exist before the first technical choice.
 
 ## The smallest product
 
@@ -45,9 +45,9 @@ flowchart TD
     O --> M["Campaigns"]
 ```
 
-This is enough to start seeing where security matters.
+This product structure is enough to reveal where the first security objectives meet the design.
 
-## First security concern: customer and tenant boundaries
+## First architecture concern: customer and tenant boundaries
 
 RedRocket serves more than one customer.
 
@@ -60,17 +60,15 @@ flowchart TD
     B --> BD["Customer B data"]
 ```
 
-The moment several organizations share the same service, RedRocket must preserve a clear boundary between them.
+The moment several organizations share the same service, the design must preserve a clear boundary between them.
 
-A user from one organization must not be able to access data belonging to another organization.
+This architecture concern is directly related to the first security objective:
 
-This concern is directly related to the first critical outcome:
+**Preserve customer boundaries.**
 
-> **Unauthorized access to customer data.**
+At this stage, there is no confirmed vulnerability. There is a property that the implementation will have to preserve.
 
-At this stage, there is no confirmed vulnerability. There is a design property that must remain true when the application is implemented.
-
-## Second security concern: identity and privileged capabilities
+## Second architecture concern: identity and privileged capabilities
 
 An organization contains users with different responsibilities.
 
@@ -86,18 +84,16 @@ flowchart LR
     A --> P["Privileged actions"]
 ```
 
-RedRocket therefore needs to answer two basic questions:
+The architecture therefore has to support two basic questions:
 
 - Who is acting?
 - What is this identity allowed to do?
 
+This concern is directly related to the second security objective:
+
+**Preserve authorized control.**
+
 The implementation is not decided yet.
-
-What matters is that privileged capabilities exist, and the product must keep them under authorized control.
-
-This concern is directly related to the second critical outcome:
-
-> **Unauthorized privileged control.**
 
 ## The smallest technical architecture
 
@@ -112,9 +108,9 @@ flowchart LR
 
 Three technical components are enough:
 
-1. browser
-2. application
-3. database
+1. a browser
+2. an application
+3. a database
 
 The technology used to implement them is secondary for now.
 
@@ -126,9 +122,9 @@ The browser is controlled by the user and sits outside the application's trust b
 
 Requests and data coming from it cannot automatically be trusted.
 
-This does not yet define a specific security problem. It identifies a boundary that will need to be observed during implementation.
+This does not yet define a concrete security problem. It identifies a boundary that will need to be observed during implementation.
 
-## Third security concern: application and data trust
+## Third architecture concern: application and data trust
 
 The application needs to read and modify customer data stored in the database.
 
@@ -146,17 +142,15 @@ flowchart LR
 
 The amount of access given to the application will influence the impact of a compromise.
 
-If one part of RedRocket is compromised, that should not automatically provide unnecessary access to the rest of the application or its data.
+This concern is directly related to the third security objective:
 
-This concern is directly related to the third critical outcome:
-
-> **Broad compromise from a limited foothold.**
+**Limit the impact of compromise.**
 
 The actual blast radius will depend on the implementation choices made during the build.
 
 ## The first trust boundaries
 
-The smallest architecture contains two obvious trust boundaries:
+The smallest technical architecture contains two obvious trust boundaries:
 
 ```mermaid
 flowchart LR
@@ -190,20 +184,26 @@ They will only be introduced if the product or architecture creates a reason for
 
 ## What we have learned before coding
 
-The smallest RedRocket design already reveals three areas that deserve security attention:
+Before choosing the application stack, we already know three things that must remain true:
 
-- customer and tenant boundaries
+- customer boundaries must be preserved
+- privileged capabilities must remain under authorized control
+- a limited compromise should not unnecessarily become a broad one
+
+The product architecture then shows us where these objectives may be challenged:
+
+- tenant boundaries
 - identity and privileged capabilities
 - application and data trust
 
-These are security concerns, not confirmed vulnerabilities.
+None of these are confirmed vulnerabilities yet.
 
-They exist because of the way the product works and the trust relationships created by the architecture.
+The next step is to build and observe where concrete security problems actually appear.
 
 ## What comes next
 
-The MVP is defined and the first architecture decision has been made: RedRocket will start as a monolith.
+The MVP is defined and RedRocket will start as a monolith.
 
 The next step is to choose the minimum application stack and build the first working version.
 
-From there, we will observe where concrete security problems appear, treat them and demonstrate the result.
+From there, concrete security problems will be documented, treated and demonstrated.
