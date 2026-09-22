@@ -55,6 +55,16 @@ For the current version, they are simple:
 
 These objectives will evolve with the product. New capabilities will create new attacker objectives and new security problems.
 
+## Regulatory context
+
+RedRocket operates in Europe, where some customers may be subject to regulations such as NIS2.
+
+Even if RedRocket itself is not necessarily a regulated entity, customers may expect their SaaS suppliers to demonstrate appropriate security practices, particularly around risk management, secure development and supply chain security.
+
+For this lab, NIS2 is not a checklist.
+
+It is one more business reason to understand security early and build it into the product from the beginning.
+
 ## Constraint
 
 RedRocket should remain small enough to understand. The goal is not to add complexity faster than the product itself.
