@@ -2,90 +2,80 @@
 
 This project explores a simple **Security by Design** approach through the construction of a small SaaS application.
 
-RedRocket Engage 🚀 is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture, nor to apply a catalogue of controls. The project starts from the business problem, identifies what creates value for the customer, observes where security concerns appear in the design, and improves the product progressively.
+RedRocket Engage 🚀 is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture or apply a catalogue of controls.
+
+The project starts from the value the product is meant to create for the customer, identifies what must remain true for that value to survive, then observes where the design and implementation can put it at risk.
 
 The approach is deliberately simple:
 
-> **Understand → Sketch → Identify concerns → Build → Observe → Iterate**
+**Understand → Sketch → Identify → Build → Observe → Iterate**
 
-## Business context
+## Start with business value
 
-Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools. RedRocket provides a common workspace where an organization can manage its users, contacts and campaigns.
+Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools.
 
-Its value comes from centralizing customer information and making it available to the people who need it. In return, customers entrust RedRocket with business data and business operations.
+RedRocket provides a common workspace where an organization can manage its users, contacts and campaigns.
 
-This creates several expectations: customer data must remain separated between organizations, privileged functions must remain under authorized control, and a limited compromise should not automatically expose the whole service.
+Its value comes from centralizing customer information and making it available to the right people.
 
-The security work starts from these business expectations.
+That value also creates dependency and trust.
+
+If RedRocket exposes one customer's data to another, gives privileged control to the wrong person or turns a limited compromise into a broad one, the product is no longer preserving the value it was built to create.
+
+Security therefore starts before the first technical choice.
 
 More detail is available in [Business Context](docs/business-context.md).
 
-## Security scope
+## Three security objectives
 
-RedRocket is intentionally scoped around **three critical security outcomes**.
+The first version of RedRocket is intentionally scoped around three security objectives.
 
-They represent the three situations we primarily want to prevent during the first iterations of the lab.
+### 1. Preserve customer boundaries
 
-### 1. Unauthorized access to customer data
+**Value at stake:** trusted centralization of customer data.
 
-**Attacker goal:** access data belonging to another organization.
+Customer data must remain accessible to the right organization and isolated from other organizations.
 
-A user from one organization must not be able to access data belonging to another organization.
-
----
-
-### 2. Unauthorized privileged control
-
-**Attacker goal:** obtain or abuse administrative capabilities.
-
-Privileged functions must remain under the control of authorized users.
+**Critical failure outcome:** unauthorized access to customer data.
 
 ---
 
-### 3. Broad compromise from a limited foothold
+### 2. Preserve authorized control
 
-**Attacker goal:** turn a limited compromise into wider access.
+**Value at stake:** trusted use of RedRocket's business capabilities.
 
-Compromising one part of RedRocket should not unnecessarily provide access to the rest of the application or its data.
+Privileged actions must remain under the control of authorized users.
+
+**Critical failure outcome:** unauthorized privileged control.
 
 ---
 
-These three outcomes do not attempt to represent every possible SaaS threat. They provide a deliberately limited scope that is sufficient to demonstrate the Security by Design reasoning of the lab.
+### 3. Limit the impact of compromise
+
+**Value at stake:** concentrating customer data and operations in one service must not create unnecessary exposure.
+
+A limited compromise should not automatically provide broad access to the rest of RedRocket or its data.
+
+**Critical failure outcome:** broad compromise from a limited foothold.
+
+---
+
+These objectives are derived from the value and trust created by the product. They are not the result of a security framework.
+
+More detail is available in [Security Objectives](docs/security-objectives.md).
 
 ## Security by Design
 
-Security is approached from the product and its architecture rather than from tools.
-
-The project does not begin with a security framework, a predefined control set or a security stack. It first asks what the product is trying to achieve, what the customer entrusts to it, what could materially damage that value, and where the design creates a path towards that outcome.
-
-Only then is a treatment considered.
-
-```mermaid
-flowchart LR
-    A["Understand"] --> B["Sketch"]
-    B --> C["Identify problems"]
-    C --> D["Build"]
-    D --> E["Observe"]
-    E --> F["Iterate"]
-    F --> B
-```
-
-A security topic is therefore introduced only when the product or architecture gives it a reason to exist.
-
-## From concern to implementation
-
-A security concern is not necessarily a vulnerability or a confirmed problem.
-
-It identifies an area where the product or architecture could create a path towards one of the three critical outcomes. Concrete security problems are documented when they appear during implementation and observation.
-
-The reasoning remains intentionally short:
+The lab follows a simple line of reasoning:
 
 ```text
 Business value
     ↓
-Critical outcome
+What must remain true?
     ↓
-Security concern
+Security objective
+    ↓
+Where can the design put it at risk?
     ↓
 Concrete problem
     ↓
@@ -94,23 +84,49 @@ Smallest appropriate treatment
 Evidence
 ```
 
-The objective is not to showcase the control itself. The objective is to make the reasoning from business requirement to technical decision visible.
+A security objective can exist before any technical decision.
+
+A concrete security problem appears later, when the design or implementation creates a real path towards a critical failure outcome.
+
+This distinction is important: the lab does not start by inventing controls for hypothetical problems.
+
+## Architecture
+
+The first architecture is deliberately small:
+
+```mermaid
+flowchart LR
+    U["User"] --> B["Browser"]
+    B --> A["RedRocket Application"]
+    A --> D["Database"]
+```
+
+The initial deployment is a monolith with one application and one database.
+
+Architecture decisions are kept minimal. Their security implications are examined only when they affect one of the security objectives.
+
+See [Architecture Foundations](docs/architecture-foundations.md).
 
 ## RedRocket MVP
 
-RedRocket remains intentionally small.
+An organization can:
 
-An organization can manage users and contacts, and create campaigns. There is no real email delivery at this stage.
+- manage users
+- manage contacts
+- create and manage draft campaigns
 
-The first architecture is deliberately simple: one application, one database and a monolithic deployment. Additional components will only be introduced when the product requires them.
+Two roles are enough:
 
-The application needs only enough functionality to expose meaningful security problems and allow their treatment to be demonstrated.
+- **Member**
+- **Admin**
+
+There is no public registration, email delivery, public API, billing or external integration in the first version.
+
+See [Minimum Viable Product](docs/mvp.md).
 
 ## Deliverable
 
-The project will result in a small working application accompanied by its architecture decisions, security observations and tests.
-
-The repository is expected to remain simple:
+RedRocket will become a small working application accompanied by its architecture decisions, security observations and tests.
 
 ```text
 saas-security-lab/
@@ -124,19 +140,30 @@ saas-security-lab/
 
 The application and its security tests will later be reused as a workload for a separate DevSecOps lab.
 
-This repository therefore focuses on understanding the business, designing the product, identifying security concerns and problems, and treating them. The DevSecOps lab will focus on continuously verifying that these security properties remain valid during development.
+This repository focuses on understanding the value, designing the product, identifying concrete security problems and treating them.
+
+The DevSecOps lab will focus on continuously verifying that these security properties remain valid during development.
 
 ## Current status
 
-The business problem, MVP, architecture foundations, critical security outcomes and first architecture decisions are defined.
+Defined:
 
-The next step is to choose the minimum application stack and start building.
+- business problem and value
+- MVP
+- three security objectives
+- architecture foundations
+- ADR process
+- monolithic architecture
+
+Next:
+
+**Choose the minimum application stack and start building.**
 
 Documentation:
 
 - [Business Context](docs/business-context.md)
+- [Security Objectives](docs/security-objectives.md)
 - [Architecture Foundations](docs/architecture-foundations.md)
 - [Minimum Viable Product](docs/mvp.md)
-- [Security Concerns](docs/security-concerns.md)
 - [Roadmap](ROADMAP.md)
 - [Architecture Decisions](docs/adr/)
