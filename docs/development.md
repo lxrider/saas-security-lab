@@ -104,18 +104,26 @@ Local credentials must not be committed to the repository.
 
 ## Database migrations
 
-Once the Django project is configured:
+Once the Django project is configured, verify the application configuration:
+
+```bash
+python manage.py check
+```
+
+Apply the existing database migrations:
+
+```bash
+python manage.py migrate
+```
+
+When the data model changes, create the corresponding migration:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-Verify the application configuration:
-
-```bash
-python manage.py check
-```
+New migration files must be committed to the repository.
 
 ## Run RedRocket
 
