@@ -81,14 +81,54 @@ CREATE DATABASE redrocket OWNER redrocket;
 \q
 ```
 
+PostgreSQL prompts for the password interactively.
+
+Do not place database passwords directly in shell commands or SQL commands that may be retained in command history.
+
 Test the connection:
 
 ```bash
 psql -h localhost -U redrocket -d redrocket
 ```
 
-variables but must never
-contain real credentials or application secrets.
+Enter the password interactively when prompted.
+
+## Application configuration
+
+Local application configuration is provided through environment variables.
+
+Create the local environment file from the provided example:
+
+```bash
+cp .env.example .env
+chmod 600 .env
+```
+
+Edit `.env` and provide local values:
+
+```text
+POSTGRES_DB=redrocket
+POSTGRES_USER=redrocket
+POSTGRES_PASSWORD=replace-with-your-local-password
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+
+DJANGO_SECRET_KEY=replace-with-your-local-secret-key
+```
+
+The `.env` file contains local secrets and must not be committed to the repository.
+
+Load the variables into the current shell before running Django:
+
+```bash
+set -a
+source .env
+set +a
+```
+
+`set -a` automatically exports variables loaded from `.env` so they are available to the Django process.
+
+The tracked `.env.example` file documents the required variables but must never contain real credentials or application secrets.
 
 ## Database migrations
 
