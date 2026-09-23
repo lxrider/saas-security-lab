@@ -75,7 +75,8 @@ sudo -u postgres psql
 Then:
 
 ```sql
-CREATE USER redrocket WITH PASSWORD 'change-me-local-only';
+CREATE USER redrocket;
+\password redrocket
 CREATE DATABASE redrocket OWNER redrocket;
 \q
 ```
@@ -95,7 +96,6 @@ Example:
 ```bash
 export POSTGRES_DB=redrocket
 export POSTGRES_USER=redrocket
-export POSTGRES_PASSWORD=change-me-local-only
 export POSTGRES_HOST=localhost
 export POSTGRES_PORT=5432
 ```
