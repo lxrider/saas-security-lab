@@ -63,6 +63,8 @@ Business value
     ↓
 Security objective
     ↓
+Attacker objective
+    ↓
 Architecture or implementation
     ↓
 Concrete security problem

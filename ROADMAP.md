@@ -14,8 +14,10 @@ flowchart LR
     B --> C["Identify"]
     C --> D["Build"]
     D --> E["Observe"]
-    E --> F["Iterate"]
-    F --> B
+    E --> F["Treat"]
+    F --> G["Demonstrate"]
+    G --> H["Iterate"]
+    H --> B
 ```
 
 ## 1. Understand
@@ -95,21 +97,21 @@ A growing number of features alone is not sufficient reason to introduce microse
 
 If one of these constraints appears, the relevant capability may be extracted and the new architecture, trust relationships and security implications will be documented in a new ADR.
 
-**This evolution will also provide the natural transition towards the future DevOps / DevSecOps lab, where distributed services, CI/CD and infrastructure concerns will become part of the problem to solve.**
+The future DevSecOps / Cloud lab remains a separate project. It does not depend on RedRocket moving to microservices and may reuse RedRocket only as a workload.
 
-Next:
+The minimum application stack is now recorded in ADR-0003:
 
-- choose the minimum application stack
-- build the smallest working version
-- avoid unnecessary infrastructure
-- keep the code easy to understand and test
-- observe where concrete vulnerabilities appear
+- Django
+- PostgreSQL
+- server-side rendering
 
-Implementation will create real relationships, dependencies and assumptions.
+The first working slice has been built around Organization, User, Login and
+Contacts.
 
-That is where security stops being theoretical.
+Implementation created real relationships, dependencies and assumptions. That
+is where security stopped being theoretical.
 
-**Status: current step.**
+**Status: first working slice complete.**
 
 ## 5. Observe
 
@@ -128,6 +130,12 @@ Document what actually exists.
 
 Do not add controls for problems that have not appeared.
 
+The first observation confirmed a cross-tenant contact access path: an
+authenticated user could retrieve another organization's contact directly by
+identifier.
+
+**Status: first observation complete.**
+
 ## 6. Treat
 
 When a concrete vulnerability is found:
@@ -138,6 +146,11 @@ When a concrete vulnerability is found:
 4. avoid introducing unnecessary complexity
 
 The treatment should remain understandable from the original business need.
+
+The first treatment scoped contact detail lookup to both the requested object
+identifier and the authenticated user's organization.
+
+**Status: first treatment complete.**
 
 ## 7. Demonstrate
 
@@ -161,6 +174,12 @@ Automated tests should be added when they provide useful evidence and prevent th
 
 These tests will later provide a natural bridge to the DevSecOps lab.
 
+The first authorization test demonstrated the change from HTTP 200 before
+treatment to HTTP 404 after treatment and now protects the tenant boundary from
+regression.
+
+**Status: first security property demonstrated.**
+
 ## 8. Iterate
 
 Update the product and architecture one step at a time.
@@ -175,22 +194,20 @@ Both will emerge as RedRocket grows.
 
 ## Current step
 
-**Build**
+**Iterate**
 
-The business context, MVP, three security objectives and first architecture concerns are defined.
-
-The project is now moving from design into implementation:
+RedRocket has completed its first full AppSec loop:
 
 ```text
 Business value
     ↓
-Security objectives
+Security objective
     ↓
-Architecture concerns
+Attacker objective
     ↓
-Build
+Implementation
     ↓
-Concrete vulnerabilities
+Concrete vulnerability
     ↓
 Treatment
     ↓
@@ -201,4 +218,5 @@ Iterate
 
 Next:
 
-**Choose the minimum application stack and build the first working RedRocket slice.**
+**Continue building the smallest useful product capability and let the next
+security question emerge from the implementation.**

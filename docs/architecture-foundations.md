@@ -1,5 +1,9 @@
 # Architecture Foundations
 
+This document records the initial architecture reasoning before the first working
+implementation existed. Confirmed implementation findings are recorded separately
+in [Security Findings](security-findings/).
+
 ## Starting from nothing
 
 RedRocket starts with one simple idea:
@@ -200,10 +204,16 @@ None of these are confirmed vulnerabilities yet.
 
 The next step is to build and identify where the design or implementation creates concrete vulnerabilities.
 
-## What comes next
+## Implementation update
 
-The MVP is defined and RedRocket will start as a monolith.
+The first implementation uses Django and PostgreSQL as recorded in ADR-0003.
 
-The next step is to choose the minimum application stack and build the first working version.
+The initial tenant-boundary concern has now materialized as a concrete finding:
+[SF-0003: Cross-tenant contact access](security-findings/0003-cross-tenant-contact-access.md).
 
-From there, concrete security problems will be documented, treated and demonstrated.
+The finding demonstrated that adding `organization` relationships to the data
+model was necessary but not sufficient. Tenant ownership also had to be enforced
+when application code retrieved tenant-owned objects.
+
+The project now continues by adding product behavior one small step at a time and
+observing which security concerns become concrete.

@@ -104,19 +104,29 @@ cp .env.example .env
 chmod 600 .env
 ```
 
-Edit `.env` and provide local values:
+Generate a local Django secret key:
+
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+Copy the generated value into `.env` together with the local PostgreSQL
+configuration:
 
 ```text
 POSTGRES_DB=redrocket
 POSTGRES_USER=redrocket
-POSTGRES_PASSWORD=replace-with-your-local-password
+POSTGRES_PASSWORD='replace-with-your-local-password'
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 
-DJANGO_SECRET_KEY=replace-with-your-local-secret-key
+DJANGO_SECRET_KEY='replace-with-your-generated-secret-key'
 ```
 
 The `.env` file contains local secrets and must not be committed to the repository.
+
+Because the file is loaded by the shell, secret values should remain quoted so
+characters generated in passwords or Django keys are not interpreted by Bash.
 
 Load the variables into the current shell before running Django:
 
@@ -152,6 +162,34 @@ python manage.py migrate
 ```
 
 New migration files must be committed to the repository.
+
+
+## Tests
+
+Django creates a temporary PostgreSQL database when running the test suite.
+
+For local development only, the `redrocket` PostgreSQL role therefore needs
+permission to create that temporary database:
+
+```bash
+sudo -u postgres psql
+```
+
+Then:
+
+```sql
+ALTER ROLE redrocket CREATEDB;
+\q
+```
+
+Run the tests with:
+
+```bash
+python manage.py test
+```
+
+`CREATEDB` is a local development requirement for this setup. It must not be
+interpreted as a desired production privilege for the application identity.
 
 ## Run RedRocket
 

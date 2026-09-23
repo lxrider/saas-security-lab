@@ -8,7 +8,7 @@ The project starts from the value the product is meant to create for the custome
 
 The approach is deliberately simple:
 
-> **Understand → Sketch → Identify → Build → Observe → Iterate**
+> **Understand → Sketch → Identify → Build → Observe → Treat → Demonstrate → Iterate**
 
 ## Start with business value
 
@@ -130,7 +130,7 @@ See [Minimum Viable Product](docs/mvp.md).
 
 ## Deliverable
 
-RedRocket will become a small working application accompanied by its architecture decisions, security observations and tests.
+RedRocket is now a small working application accompanied by its architecture decisions, security observations and tests.
 
 ```text
 saas-security-lab/
@@ -138,7 +138,8 @@ saas-security-lab/
 ├── identity/
 ├── contacts/
 ├── docs/
-│   └── adr/
+│   ├── adr/
+│   └── security-findings/
 ├── manage.py
 ├── requirements.txt
 └── README.md
@@ -154,33 +155,29 @@ software is built and deployed.
 
 ## Current status
 
-Defined:
+Implemented:
 
-- business problem and value
-- MVP
-- three security objectives
-- architecture foundations
-- ADR process
-- modular monolith
-- Django + PostgreSQL application stack
+- Django + PostgreSQL modular monolith
+- organization-aware custom User model
+- Contact model
+- authentication flow
+- tenant-aware contact list
+- contact detail flow
+- first complete AppSec learning loop
+
+The first confirmed application vulnerability was a cross-tenant contact access
+path. An authenticated user from one organization could request a contact owned
+by another organization directly by identifier.
+
+The lookup is now scoped to both the contact identifier and the authenticated
+user's organization, and an automated test verifies the tenant boundary.
 
 Current step:
 
-**Build the smallest working RedRocket slice.**
+**Iterate from the first demonstrated security property.**
 
-The first implementation target is:
-
-```text
-Organization
-    ↓
-User
-    ↓
-Login
-    ↓
-Contacts
-```
-
-The objective is to reach enough real application behavior to observe the first tenant-isolation and authorization path.
+The next product capability should remain small. Any new security topic should
+emerge from real application behavior rather than from a predefined checklist.
 
 Documentation:
 
@@ -191,3 +188,4 @@ Documentation:
 - [Development](docs/development.md)
 - [Roadmap](ROADMAP.md)
 - [Architecture Decisions](docs/adr/)
+- [Security Findings](docs/security-findings/)

@@ -53,8 +53,20 @@ The MVP does not include:
 
 Those can appear later if the product gives us a reason to add them.
 
-## Next
+## Current implementation
 
-Build the smallest working version, then observe where concrete security problems appear.
+The first working slice now includes:
 
-Significant architecture decisions made along the way are recorded as Architecture Decision Records.
+- organization-aware users
+- login
+- contacts
+- tenant-aware contact listing and detail access
+
+Campaigns and administrative user/role management remain part of the MVP target
+but have not been implemented yet.
+
+The first contact flow has already produced and treated a concrete tenant
+isolation vulnerability.
+
+Significant architecture decisions are recorded as Architecture Decision Records,
+and confirmed security problems are recorded as Security Findings.

@@ -145,9 +145,9 @@ A SPA or separate frontend would introduce an API boundary, additional state han
 
 These trade-offs are acceptable because the current objective is to learn from real Product Security behavior, not to maximize architectural portability.
 
-## Next step
+## Initial implementation target
 
-Build the smallest working slice:
+The first target was:
 
 ```text
 Organization
@@ -163,4 +163,10 @@ Create at least two organizations with separate users and contacts.
 
 Then test whether a user from one organization can directly access a contact belonging to another organization.
 
-That will give RedRocket its first real authorization path to observe.
+That target provided RedRocket's first real authorization path to observe.
+
+## Outcome
+
+The slice was implemented. The direct-object access test exposed a cross-tenant
+authorization vulnerability, documented and treated in
+[SF-0003](../security-findings/0003-cross-tenant-contact-access.md).

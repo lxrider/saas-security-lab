@@ -1,5 +1,9 @@
 # SF-0002: Hardcoded Django secret key
 
+## Status
+
+Treated
+
 ## Context
 
 The Django project was created with a generated `SECRET_KEY` stored directly in
@@ -84,5 +88,5 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 - `.env.example` contains only the variable name or a non-secret placeholder
 - Django reads `DJANGO_SECRET_KEY` from the runtime environment
 - Django fails to start if `DJANGO_SECRET_KEY` is missing
-- the previously exposed key has been replaced
+- the previously tracked key is no longer used by the application
 - `python manage.py check` succeeds when the runtime secret is provided
