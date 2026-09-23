@@ -16,9 +16,14 @@ def contact_list(request):
         {"contacts": contacts},
     )
 
+
 @login_required
 def contact_detail(request, pk):
-    contact = get_object_or_404(Contact, pk=pk)
+    contact = get_object_or_404(
+        Contact,
+        pk=pk,
+        organization=request.user.organization,
+    )
 
     return render(
         request,
