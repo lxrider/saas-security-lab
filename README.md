@@ -75,18 +75,22 @@ What must remain true?
     ↓
 Security objective
     ↓
-Where can the design put it at risk?
+Attacker objective
     ↓
-Concrete problem
+Architecture / trust relationships
     ↓
-Smallest appropriate treatment
+Implementation
+    ↓
+Concrete vulnerability
+    ↓
+Treatment
     ↓
 Evidence
 ```
 
 A security objective can exist before any technical decision.
 
-A concrete security problem appears later, when the design or implementation creates a real path towards a critical failure outcome.
+A concrete vulnerability appears later, when the design or implementation creates a real path towards a critical failure outcome.
 
 This distinction is important: the lab does not start by inventing controls for hypothetical problems.
 
@@ -101,7 +105,7 @@ flowchart LR
     A --> D["Database"]
 ```
 
-The initial deployment is a monolith with one application and one database.
+The initial deployment is a **modular monolith** with one Django application and one PostgreSQL database.
 
 Architecture decisions are kept minimal. Their security implications are examined only when they affect one of the security objectives.
 
@@ -130,19 +134,23 @@ RedRocket will become a small working application accompanied by its architectur
 
 ```text
 saas-security-lab/
-├── app/
-├── tests/
+├── config/
+├── identity/
+├── contacts/
 ├── docs/
 │   └── adr/
-├── Dockerfile
+├── manage.py
+├── requirements.txt
 └── README.md
 ```
 
 The application and its security tests will later be reused as a workload for a separate DevSecOps lab.
 
-This repository focuses on understanding the value, designing the product, identifying concrete security problems and treating them.
+This repository focuses on understanding the value, designing the product, identifying concrete application vulnerabilities and treating them.
 
-The DevSecOps lab will focus on continuously verifying that these security properties remain valid during development.
+The DevSecOps lab will focus on securing the software delivery lifecycle and
+continuously verifying that important security properties remain valid as the
+software is built and deployed.
 
 ## Current status
 
@@ -153,11 +161,26 @@ Defined:
 - three security objectives
 - architecture foundations
 - ADR process
-- monolithic architecture
+- modular monolith
+- Django + PostgreSQL application stack
 
-Next:
+Current step:
 
-**Choose the minimum application stack and start building.**
+**Build the smallest working RedRocket slice.**
+
+The first implementation target is:
+
+```text
+Organization
+    ↓
+User
+    ↓
+Login
+    ↓
+Contacts
+```
+
+The objective is to reach enough real application behavior to observe the first tenant-isolation and authorization path.
 
 Documentation:
 
@@ -165,5 +188,6 @@ Documentation:
 - [Security Objectives](docs/security-objectives.md)
 - [Architecture Foundations](docs/architecture-foundations.md)
 - [Minimum Viable Product](docs/mvp.md)
+- [Development](docs/development.md)
 - [Roadmap](ROADMAP.md)
 - [Architecture Decisions](docs/adr/)
