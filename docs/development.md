@@ -87,20 +87,8 @@ Test the connection:
 psql -h localhost -U redrocket -d redrocket
 ```
 
-## Application configuration
-
-Local database configuration should be provided through environment variables.
-
-Example:
-
-```bash
-export POSTGRES_DB=redrocket
-export POSTGRES_USER=redrocket
-export POSTGRES_HOST=localhost
-export POSTGRES_PORT=5432
-```
-
-Local credentials must not be committed to the repository.
+variables but must never
+contain real credentials or application secrets.
 
 ## Database migrations
 
