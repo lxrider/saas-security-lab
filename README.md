@@ -1,9 +1,9 @@
-# SaaS Security Lab
+# SaaS Security Lab 🚀
 
 This project explores **Security by Design and AppSec foundations** through the
 construction of a small multi-tenant SaaS application.
 
-RedRocket Engage 🚀 is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture or apply a catalogue of controls.
+*RedRocket Engage* is a fictional multi-tenant B2B SaaS. The objective is not to build a complete security architecture or apply a catalogue of controls.
 
 The project starts from the value the product is meant to create for the customer, identifies what must remain true for that value to survive, then observes where the design and implementation can put it at risk.
 
