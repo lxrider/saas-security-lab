@@ -7,7 +7,7 @@ construction of a small multi-tenant SaaS application.
 
 The objective is not to build a complete security architecture or apply a catalogue of controls.
 
-The project starts from the value the product is meant to create for the customer, identifies what must remain true for that value to survive, then observes where the design and implementation can put it at risk.
+The project starts from the value the product is meant to create for the customer, identifies what must remain true for that value to survive, then observes where the *seam*, design and implementation can put it at risk.
 
 The approach is deliberately simple:
 
@@ -23,7 +23,7 @@ Its value comes from centralizing customer information and making it available t
 
 That value also creates dependency and trust.
 
-If RedRocket exposes one customer's data to another, gives privileged control to the wrong person or turns a limited compromise into a broad one, the product is no longer preserving the value it was built to create.
+If RedRocket exposes one customer's data to another, gives privileged control to the wrong person or turns a limited compromise into a broad one, the product is no longer preserving the value it was built to create 
 
 Security therefore starts before the first technical choice.
 
