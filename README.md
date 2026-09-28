@@ -15,9 +15,7 @@ The approach is deliberately simple:
 
 ## Start with business value
 
-Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools.
-
-RedRocket provides a common workspace where an organization can manage its users, contacts and campaigns.
+Small B2B teams often manage customer information across spreadsheets, shared files and disconnected tools. RedRocket provides a common workspace where an organization can manage its users, contacts and campaigns.
 
 Its value comes from centralizing customer information and making it available to the right people.
 
